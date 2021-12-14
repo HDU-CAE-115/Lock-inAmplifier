@@ -1,0 +1,12 @@
+Removed Pin From Net: NetName=RGND Pin=EC1-1
+Removed Pin From Net: NetName=GND Pin=EC1-2
+Removed Pin From Net: NetName=RGND Pin=U4-2
+Removed Pin From Net: NetName=RGND Pin=U4-7
+Removed Member From Class: ClassName=LIA Member=EC1
+Change Component Footprint: Designator=U2 Old Footprint=SOT89(2-4) New Footprint=SOT223
+Added Component: Designator=C10(0603C)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=GND Pin=C10-1
+Added Pin To Net: NetName=NetEC3_1 Pin=C10-2
+Change Net Name : Old Net Name=NetEC3_1 New Net Name=NetC10_2
+Added Member To Class: ClassName=LIA Member=Component C10 0.1uF
