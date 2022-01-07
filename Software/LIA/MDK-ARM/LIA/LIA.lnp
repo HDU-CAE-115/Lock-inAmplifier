@@ -3,6 +3,7 @@
 "lia\main.o"
 "lia\gpio.o"
 "lia\spi.o"
+"lia\usart.o"
 "lia\stm32g4xx_it.o"
 "lia\stm32g4xx_hal_msp.o"
 "lia\stm32g4xx_hal_spi.o"
@@ -22,11 +23,13 @@
 "lia\stm32g4xx_hal_cortex.o"
 "lia\stm32g4xx_hal_tim.o"
 "lia\stm32g4xx_hal_tim_ex.o"
+"lia\stm32g4xx_hal_uart.o"
+"lia\stm32g4xx_hal_uart_ex.o"
 "lia\system_stm32g4xx.o"
 "lia\usermain.o"
 "lia\ad7192function.o"
 "lia\ad7190.o"
---strict --scatter "LIA\LIA.sct"
+--library_type=microlib --strict --scatter "LIA\LIA.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "LIA.map" -o LIA\LIA.axf

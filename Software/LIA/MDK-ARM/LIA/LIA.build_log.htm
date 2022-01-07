@@ -22,21 +22,33 @@ Dialog DLL:      TCM.DLL V1.53.0.0
  
 <h2>Project:</h2>
 F:\Desktop\Lock-inAmplifier\Software\LIA\MDK-ARM\LIA.uvprojx
-Project File Date:  12/22/2021
+Project File Date:  01/06/2022
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Software\Keil_v5\ARM\ARMCC\Bin'
 Build target 'LIA'
 compiling Usermain.c...
-..\Users\Inc\Usermain.h(4): warning:  #1-D: last line of file ends without a newline
-  #include "ad7190.h"
 ..\Users\Inc\ad7190.h(99): warning:  #1-D: last line of file ends without a newline
    
-..\Users\Src\Usermain.c: 2 warnings, 0 errors
+..\Users\Inc\Usermain.h(9): warning:  #1295-D: Deprecated declaration AD7190_RST - give arg types
+  void AD7190_RST();
+..\Users\Src\Usermain.c(61): warning:  #177-D: variable "rbuf"  was declared but never referenced
+  	unsigned	char	rbuf[3] = {0};
+..\Users\Src\Usermain.c(72): warning:  #177-D: variable "rbuf"  was declared but never referenced
+  	unsigned	char	rbuf[3] = {0};
+..\Users\Src\Usermain.c: 4 warnings, 0 errors
+compiling main.c...
+..\Users\Inc\ad7190.h(99): warning:  #1-D: last line of file ends without a newline
+   
+..\Users\Inc\Usermain.h(9): warning:  #1295-D: Deprecated declaration AD7190_RST - give arg types
+  void AD7190_RST();
+../Core/Src/main.c(100): warning:  #223-D: function "Usermain" declared implicitly
+  		Usermain();
+../Core/Src/main.c: 3 warnings, 0 errors
 linking...
-Program Size: Code=5986 RO-data=522 RW-data=20 ZI-data=1748  
+Program Size: Code=16272 RO-data=712 RW-data=60 ZI-data=1284  
 FromELF: creating hex file...
-"LIA\LIA.axf" - 0 Error(s), 2 Warning(s).
+"LIA\LIA.axf" - 0 Error(s), 7 Warning(s).
 
 <h2>Software Packages used:</h2>
 

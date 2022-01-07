@@ -30,7 +30,12 @@ lia\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pwr.h
 lia\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pwr_ex.h
 lia\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_spi.h
 lia\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_spi_ex.h
+lia\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h
+lia\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h
 lia\main.o: ../Core/Inc/spi.h
+lia\main.o: ../Core/Inc/usart.h
 lia\main.o: ../Core/Inc/gpio.h
 lia\main.o: ..\Users\Inc\Usermain.h
+lia\main.o: D:\Software\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+lia\main.o: D:\Software\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 lia\main.o: ..\Users\Inc\ad7190.h

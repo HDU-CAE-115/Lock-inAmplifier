@@ -1,0 +1,9 @@
+This file is the manifest for the generated code from model 'TpLockInAmp'.
+F:\Desktop\Lock-inAmplifier\Matlab仿真\TpLockInAmp_ert_rtw\TpLockInAmp.c
+F:\Desktop\Lock-inAmplifier\Matlab仿真\TpLockInAmp_ert_rtw\ert_main.c
+F:\Desktop\Lock-inAmplifier\Matlab仿真\TpLockInAmp_ert_rtw\TpLockInAmp.h
+F:\Desktop\Lock-inAmplifier\Matlab仿真\TpLockInAmp_ert_rtw\TpLockInAmp_private.h
+F:\Desktop\Lock-inAmplifier\Matlab仿真\TpLockInAmp_ert_rtw\TpLockInAmp_types.h
+F:\Desktop\Lock-inAmplifier\Matlab仿真\TpLockInAmp_ert_rtw\rtwtypes.h
+F:\Desktop\Lock-inAmplifier\Matlab仿真\TpLockInAmp_ert_rtw\defines.txt
+F:\Desktop\Lock-inAmplifier\Matlab仿真\TpLockInAmp_ert_rtw\TpLockInAmp_manifest.txt
