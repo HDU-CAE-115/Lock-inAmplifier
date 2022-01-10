@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'TpLockInAmp'.
  *
- * Model version                  : 1.2
+ * Model version                  : 1.5
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Tue Jan  4 16:58:07 2022
+ * C/C++ source code generated on : Mon Jan 10 12:27:51 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -103,13 +103,9 @@ extern RT_MODEL_TpLockInAmp_T *const TpLockInAmp_M;
 /* Exported data declaration */
 
 /* Declaration for custom storage class: Global */
-extern real_T product;                 /* '<S1>/Product' */
-extern real_T product1;                /* '<S1>/Product1' */
 extern real_T signal_amp;              /* '<S1>/MATLAB Function' */
 extern real_T signal_input;            /* '<Root>/In1' */
 extern real_T signal_pha;              /* '<S1>/Trigonometric Function' */
-extern real_T sinewave1;               /* '<S1>/Sine Wave1' */
-extern real_T sinewave2;               /* '<S1>/Sine Wave2' */
 
 /*-
  * The generated code includes comments that allow you to trace directly

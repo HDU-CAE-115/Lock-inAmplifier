@@ -26,9 +26,10 @@
 "lia\stm32g4xx_hal_uart.o"
 "lia\stm32g4xx_hal_uart_ex.o"
 "lia\system_stm32g4xx.o"
+"..\Drivers\CMSIS\DSP\Lib\ARM\arm_cortexM4lf_math.lib"
 "lia\usermain.o"
-"lia\ad7192function.o"
-"lia\ad7190.o"
+"lia\ad719x.o"
+"lia\tplockinamp.o"
 --library_type=microlib --strict --scatter "LIA\LIA.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

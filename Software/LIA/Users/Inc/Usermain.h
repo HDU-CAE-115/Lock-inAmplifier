@@ -4,8 +4,7 @@
 #include "spi.h"
 #include "usart.h"
 #include "math.h"
-#include "ad7190.h"
+#include "AD719X.h"
+#include "TpLockInAmp.h"
 
-void AD7190_RST();
-void AD7190_WR_ConfigReg(unsigned char cbyte_2,unsigned char cbyte_1,unsigned char cbyte_0);
-void AD7190_WR_ModeReg(unsigned char cbyte_2,unsigned char cbyte_1,unsigned char cbyte_0);
+#define C_Gain 5.4
