@@ -7,4 +7,4 @@
 #include "AD719X.h"
 #include "TpLockInAmp.h"
 
-#define V_Gain 5.4
+#define V_Gain 6.1

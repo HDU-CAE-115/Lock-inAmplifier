@@ -16,6 +16,7 @@ void Usermain(){
 	AD7190_WR_ConfigReg(0x00,0x10,0x08);
 //写模式寄存器
 	AD7190_WR_ModeReg(0x0C,0x00,0x05);//960HZ
+	
 //	buf[0] = 0x28;
 //	HAL_SPI_Transmit(&hspi1,buf,1,1000);//control the progress to write mode register 
 //	buf[0] = 0x40;
@@ -23,27 +24,18 @@ void Usermain(){
 
 	AD7190_ReadDataContinous(MAXDATASIZE);
 	AD7190_ValueConversion(adc_result,MAXDATASIZE);
-
-//	while(cnt<MAXDATASIZE){
-//		adc_result[cnt] = AD7190_ValueConversionOnce();
-//		cnt++;
-//	}
-	for(cnt = 0;cnt<MAXDATASIZE;cnt++) printf("%lf\n",adc_result[cnt]);
-	
-	cnt = 0;
+	//for(cnt = 0;cnt<MAXDATASIZE;cnt++) printf("%lf\n",adc_result[cnt]);
 	TpLockInAmp_initialize();//锁相放大器初始化
-	printf("***********************\n");
+	//printf("***********************\n");
 	while(cnt<MAXDATASIZE){
 			signal_input = adc_result[cnt];
-			
 			//printf("%lf\n",0.02365*sin(TpLockInAmp_DW.SineWave1_AccFreqNorm));
 			TpLockInAmp_step();
 			signal_output = signal_amp;
 			printf("%lf\n",signal_output);
-			cnt++; 
+			cnt++;
 	}
 	TpLockInAmp_terminate();//锁相放大器停止
-//	for(cnt = 0;cnt<MAXDATASIZE;cnt++) printf("%lf\n",adc_result[cnt]);
 	while(1){
 		
 	}
