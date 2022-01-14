@@ -3,7 +3,7 @@
 <title>Static Call Graph - [LIA\LIA.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image LIA\LIA.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Wed Jan 12 11:18:57 2022
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Thu Jan 13 19:31:46 2022
 <BR><P>
 <H3>Maximum Stack Usage =        440 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -958,7 +958,7 @@ Global Symbols
 <P><STRONG><a name="[52]"></a>SystemInit</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, system_stm32g4xx.o(i.SystemInit))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32g431xx.o(.text)
 </UL>
-<P><STRONG><a name="[a2]"></a>T_CICCompensationDecimator_Init</STRONG> (Thumb, 194 bytes, Stack size 16 bytes, tplockinamp.o(i.T_CICCompensationDecimator_Init))
+<P><STRONG><a name="[a2]"></a>T_CICCompensationDecimator_Init</STRONG> (Thumb, 180 bytes, Stack size 16 bytes, tplockinamp.o(i.T_CICCompensationDecimator_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = T_CICCompensationDecimator_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TpLockInAmp_initialize
@@ -1002,7 +1002,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Usermain
 </UL>
 
-<P><STRONG><a name="[a7]"></a>TpLock_CICCompensationDecimator</STRONG> (Thumb, 612 bytes, Stack size 64 bytes, tplockinamp.o(i.TpLock_CICCompensationDecimator))
+<P><STRONG><a name="[a7]"></a>TpLock_CICCompensationDecimator</STRONG> (Thumb, 586 bytes, Stack size 64 bytes, tplockinamp.o(i.TpLock_CICCompensationDecimator))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = TpLock_CICCompensationDecimator &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
@@ -1047,7 +1047,7 @@ Global Symbols
 <P><STRONG><a name="[6]"></a>UsageFault_Handler</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32g4xx_it.o(i.UsageFault_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32g431xx.o(RESET)
 </UL>
-<P><STRONG><a name="[ad]"></a>Usermain</STRONG> (Thumb, 126 bytes, Stack size 0 bytes, usermain.o(i.Usermain))
+<P><STRONG><a name="[ad]"></a>Usermain</STRONG> (Thumb, 198 bytes, Stack size 0 bytes, usermain.o(i.Usermain))
 <BR><BR>[Stack]<UL><LI>Max Depth = 440<LI>Call Chain = Usermain &rArr; TpLockInAmp_step &rArr; __hardfp_sin &rArr; __ieee754_rem_pio2 &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TpLockInAmp_terminate

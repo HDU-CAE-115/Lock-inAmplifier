@@ -40,7 +40,6 @@ lia\usermain.o: ../Core/Inc/usart.h
 lia\usermain.o: D:\Software\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 lia\usermain.o: ..\Users\Inc\AD719X.h
 lia\usermain.o: ..\Users\Inc\Usermain.h
-lia\usermain.o: ..\Users\Inc\AD719X.h
 lia\usermain.o: ..\Users\Inc\TpLockInAmp.h
 lia\usermain.o: ..\Users\Inc\rtwtypes.h
 lia\usermain.o: ..\Users\Inc\TpLockInAmp_types.h

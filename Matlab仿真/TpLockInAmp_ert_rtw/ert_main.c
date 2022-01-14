@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'TpLockInAmp'.
  *
- * Model version                  : 1.5
+ * Model version                  : 1.7
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Tue Jan 11 13:29:13 2022
+ * C/C++ source code generated on : Fri Jan 14 16:54:24 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)

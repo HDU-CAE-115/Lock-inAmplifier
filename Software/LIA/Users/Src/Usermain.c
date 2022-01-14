@@ -24,9 +24,10 @@ void Usermain(){
 
 	AD7190_ReadDataContinous(MAXDATASIZE);
 	AD7190_ValueConversion(adc_result,MAXDATASIZE);
-	//for(cnt = 0;cnt<MAXDATASIZE;cnt++) printf("%lf\n",adc_result[cnt]);
+	for(cnt = 0;cnt<MAXDATASIZE;cnt++) printf("%lf\n",adc_result[cnt]);
 	TpLockInAmp_initialize();//锁相放大器初始化
-	//printf("***********************\n");
+	printf("***********************\n");
+	cnt=0;
 	while(cnt<MAXDATASIZE){
 			signal_input = adc_result[cnt];
 			//printf("%lf\n",0.02365*sin(TpLockInAmp_DW.SineWave1_AccFreqNorm));

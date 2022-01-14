@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'TpLockInAmp'.
  *
- * Model version                  : 1.5
+ * Model version                  : 1.7
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Tue Jan 11 13:29:13 2022
+ * C/C++ source code generated on : Fri Jan 14 16:54:24 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -18,36 +18,36 @@
 #include "rtwtypes.h"
 
 /* Model Code Variants */
-#ifndef struct_tag_PQqzetjOvttfXwUrCjm4jF
-#define struct_tag_PQqzetjOvttfXwUrCjm4jF
+#ifndef struct_tag_R6cskI0ley3NFqzhtDw3K
+#define struct_tag_R6cskI0ley3NFqzhtDw3K
 
-struct tag_PQqzetjOvttfXwUrCjm4jF
+struct tag_R6cskI0ley3NFqzhtDw3K
 {
   int32_T S0_isInitialized;
   int32_T W0_PhaseIdx;
   real_T W1_Sums;
   int32_T W2_CoeffIdx;
-  real_T W3_StatesBuff[540];
+  real_T W3_StatesBuff[504];
   int32_T W4_TapDelayIndex;
   int32_T W5_PrevNumChan;
   real_T P0_IC;
-  real_T P1_FILT[544];
+  real_T P1_FILT[508];
   real_T O0_Y0[2];
 };
 
-#endif                                 /*struct_tag_PQqzetjOvttfXwUrCjm4jF*/
+#endif                                 /*struct_tag_R6cskI0ley3NFqzhtDw3K*/
 
 #ifndef typedef_b_dsp_FIRDecimator_0_TpLockIn_T
 #define typedef_b_dsp_FIRDecimator_0_TpLockIn_T
 
-typedef struct tag_PQqzetjOvttfXwUrCjm4jF b_dsp_FIRDecimator_0_TpLockIn_T;
+typedef struct tag_R6cskI0ley3NFqzhtDw3K b_dsp_FIRDecimator_0_TpLockIn_T;
 
 #endif                               /*typedef_b_dsp_FIRDecimator_0_TpLockIn_T*/
 
-#ifndef struct_tag_RUbMqdr1C1UsIGjy3mtb
-#define struct_tag_RUbMqdr1C1UsIGjy3mtb
+#ifndef struct_tag_GlLawrRFrVtFmsVe30VRJ
+#define struct_tag_GlLawrRFrVtFmsVe30VRJ
 
-struct tag_RUbMqdr1C1UsIGjy3mtb
+struct tag_GlLawrRFrVtFmsVe30VRJ
 {
   boolean_T matlabCodegenIsDeleted;
   int32_T isInitialized;
@@ -55,19 +55,19 @@ struct tag_RUbMqdr1C1UsIGjy3mtb
   b_dsp_FIRDecimator_0_TpLockIn_T cSFunObject;
 };
 
-#endif                                 /*struct_tag_RUbMqdr1C1UsIGjy3mtb*/
+#endif                                 /*struct_tag_GlLawrRFrVtFmsVe30VRJ*/
 
 #ifndef typedef_b_dspcodegen_FIRDecimator_TpL_T
 #define typedef_b_dspcodegen_FIRDecimator_TpL_T
 
-typedef struct tag_RUbMqdr1C1UsIGjy3mtb b_dspcodegen_FIRDecimator_TpL_T;
+typedef struct tag_GlLawrRFrVtFmsVe30VRJ b_dspcodegen_FIRDecimator_TpL_T;
 
 #endif                               /*typedef_b_dspcodegen_FIRDecimator_TpL_T*/
 
-#ifndef struct_tag_DJ6qkcE7Wuwb7W3rWUG1AF
-#define struct_tag_DJ6qkcE7Wuwb7W3rWUG1AF
+#ifndef struct_tag_UoUGwTJNeQkKOfioFJSBRF
+#define struct_tag_UoUGwTJNeQkKOfioFJSBRF
 
-struct tag_DJ6qkcE7Wuwb7W3rWUG1AF
+struct tag_UoUGwTJNeQkKOfioFJSBRF
 {
   boolean_T matlabCodegenIsDeleted;
   int32_T isInitialized;
@@ -77,12 +77,12 @@ struct tag_DJ6qkcE7Wuwb7W3rWUG1AF
   b_dspcodegen_FIRDecimator_TpL_T _pobj0;
 };
 
-#endif                                 /*struct_tag_DJ6qkcE7Wuwb7W3rWUG1AF*/
+#endif                                 /*struct_tag_UoUGwTJNeQkKOfioFJSBRF*/
 
 #ifndef typedef_dsp_CICCompensationDecimator__T
 #define typedef_dsp_CICCompensationDecimator__T
 
-typedef struct tag_DJ6qkcE7Wuwb7W3rWUG1AF dsp_CICCompensationDecimator__T;
+typedef struct tag_UoUGwTJNeQkKOfioFJSBRF dsp_CICCompensationDecimator__T;
 
 #endif                               /*typedef_dsp_CICCompensationDecimator__T*/
 

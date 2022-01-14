@@ -15,20 +15,7 @@
 /*     +------------+------------+------------+------------+------------+---------------+------------+------------+     */
 /*     | WEN(0)| R/W(0) | RS2(0) | RS1(0)| RS0(0) |CREAD(0)|   0(0)  |  0(0)  |     */
 /*     +------------+------------+------------+------------+------------+---------------+------------+------------+     */
-#define	WEN             0x00    //WEN位为0时，允许继续写通讯寄存器
-#define WEN_DIS         0x80    //WEN位为1时，禁止继续写通讯寄存器
-#define RW_W            0x00    //R/W位为0时，下一操作为写指定寄存器
-#define	RW_R            0x40    //R/W位为1时，下一操作读写指定寄存器
-#define REG_COM_STA     0x00    //读为状态寄存器，写为通讯寄存器*/
-#define	REG_MODE        0x08    //操作模式寄存器
-#define	REG_CONF        0x10    //操作配置寄存器
-#define	REG_DATA        0x18    //操作数据寄存器
-#define	REG_ID          0x20    //操作ID寄存器
-#define	REG_GPOCON      0x28    //操作GPOCON寄存器
-#define	REG_OFFSET      0x30    //操作失调寄存器
-#define	REG_FS          0x38    //操作满量程寄存器
-#define	CREAD_EN        0x04    //连续读取
-#define	CREAD_DIS       0x00    //单次读取
+
 
 /*     状态寄存器8位，只读,RS2,RS1,RS0=0,0,0;上电/复位=0x80                       */
 /*     状态寄存器位功能取值宏定义                                                 */
@@ -37,22 +24,7 @@
 /*     +------------+------------+-------------+----------------+-----------+------------+------------+------------+   */
 /*     | RDY(1)| ERR(0)|NOREF(0)|PARITY(0) | 0(0)   |CHD2(0)|CHD1(0)|CHD0(0)|   */
 /*     +------------+------------+-------------+----------------+-----------+------------+------------+------------+   */
-#define	RDY_H			0x80    /*数据未就绪*/
-#define	RDY_L			0x00    /*数据准备就绪*/
-#define	ERR_H			0x40    /*结果错误*/
-#define	ERR_L			0x00    /*结果正确*/
-#define	NOREF_H			0x20    /*基准源故障*/
-#define	NOREF_L			0x00    /*基准源正确*/
-#define	PARITY_H		0x10    /*奇数个1*/
-#define	PARITY_L		0x00    /*偶数个1*/
-#define	CHDST_AIN1_AIN2         0x00    /*对应通道为第一路差分输入*/
-#define	CHDST_AIN3_AIN4         0x01    /*对应通道为第二路差分输入*/
-#define	CHDST_TEMP		0x02    /*对应通道为温度输入*/
-#define	CHDST_AIN2_AIN2         0x03    /*对应通道为第二路输入*/
-#define	CHDST_AIN1_COM          0x04    /*对应通道为第一路单端输入*/
-#define	CHDST_AIN2_COM          0x05    /*对应通道为第二路单端输入*/
-#define	CHDST_AIN3_COM          0x06    /*对应通道为第三路单端输入*/
-#define	CHDST_AIN4_COM          0x07    /*对应通道为第四路单端输入*/
+
 
 /*   模式寄存器24位，可读可写,RS2,RS1,RS0=0,0,1;上电/复位=0x080060            */
 /*   模式寄存器位功能操作宏定义                                               */
@@ -69,30 +41,7 @@
 /*   +--------------+-----------+--------------+-----------------+----------------+--------------+-----------+-----------+  */
 /*   | FS7(0)  |FS6(0) | FS5(0)   |  FS4(0)  |  FS3(0)   | FS2(0)  | FS1(0) |FS0(0)|   */
 /*   +--------------+-----------+--------------+-----------------+----------------+--------------+-----------+-----------+  */
-#define	MODE_CONT               0x000000        /*连续转换模式（默认）*/
-#define	MODE_SING               0x200000        /*单次转换模式*/
-#define	MODE_IDLE               0x400000        /*空闲模式*/
-#define	MODE_PD                 0x600000        /*关断模式*/
-#define	MODE_INZCL              0x800000        /*内部零电平校准*/
-#define	MODE_INFCL              0xA00000        /*内部满量程校准*/
-#define	MODE_SYSZCL             0xC00000        /*系统零电平校准*/
-#define	MODE_SYSFCL             0xE00000        /*系统满量程校准*/
-#define	DAT_STA_EN              0x100000        /*状态与数据寄存器同传*/
-#define	DAT_STA_DIS             0x000000        /*状态与数据寄存器不同传*/	  
-#define	EXT_XTAL                0x000000        /*外部晶振*/
-#define	EXT_CLK                 0x040000        /*外部时钟*/
-#define	INCLK_MCLK2TRI          0x080000        /*内部时钟*/
-#define	INCLK_MCLK2EN           0x0C0000        /*内部时钟，输出*/
-#define	SINC_4                  0x000000        /*使用sinc4滤波*/
-#define	SINC_3                  0x008000        /*使用sinc3滤波*/
-#define	ENPAR_EN                0x002000        /*使能奇偶校验*/
-#define	ENPAR_DIS               0x000000        /*禁止奇偶校验*/
-#define	CLK_DIV_2               0x001000        /*主时钟2分频*/
-#define	CLK_DIV_DIS             0x000000        /*主时钟不分频*/
-#define	SINGLECYCLE_EN          0x000800        /*单周期转换使能*/
-#define	SINGLECYCLE_DIS         0x000000        /*单周期转换失能*/
-#define	REJ60_EN                0x000400        /*使能60Hz陷波频率*/
-#define	REJ60_DIS               0x000000        /*失能60Hz陷波频率*/
+
 
 /*    配置寄存器，24位，可读可写,RS2,RS1,RS0=0,1,0;上电/复位=0x000117         */
 /*    配置寄存器位功能操作宏定义                                              */
@@ -109,32 +58,7 @@
 /*    +-------------+-----------+--------------+-----------------+----------------+--------------+-----------+-----------+  */
 /*    |BURN(0)|REFDET(0) | 0(0) |  BUF(0)   |  U/B(0)   |  G2(0)  | G1(0) | G0(0) |    */
 /*    +-------------+-----------+--------------+-----------------+----------------+--------------+-----------+-----------+  */	
-#define CHOP_EN                 0x800000        /*斩波使能*/
-#define	CHOP_DIS                0x000000        /*斩波禁用*/
-#define	REF_IN1                 0x000000        /*基准电压输入1*/
-#define	REF_IN2                 0x100000        /*基准电压输入2*/
-#define	AIN1_AIN2               0x000100        /*差分通道1*/
-#define	AIN3_AIN4               0x000200        /*差分通道2*/
-#define	TEMP                    0x000400        /*温度*/
-#define	AIN2_AIN2               0x000800        /*模拟通道2*/
-#define	AIN1_COM                0x001000        /*单端输入1*/
-#define	AIN2_COM                0x002000        /*单端输入2*/
-#define	AIN3_COM                0x004000        /*单端输入3*/
-#define	AIN4_COM                0x008000        /*单端输入4*/
-#define	BURN_EN                 0x000080        /*使能激励电流*/
-#define	BURN_DIS                0x000000        /*禁用激励电流*/
-#define	REFDET_EN               0x000040        /*使能基准电压检测*/
-#define	REFDET_DIS              0x000000        /*禁用基准电压检测*/
-#define	BUF_EN                  0x000010        /*使能模拟输入端的缓冲器*/
-#define	BUF_DIS                 0x000000        /*禁用模拟输入端的缓冲器*/
-#define	UB_UNI                  0x000008        /*单极性工作模式*/
-#define UB_BI                   0x000000        /*双极性工作模式*/
-#define	GAIN_1                  0x000000        /*1倍增益*/
-#define	GAIN_8                  0x000003        /*8倍增益*/
-#define	GAIN_16                 0x000004        /*16倍增益*/
-#define	GAIN_32                 0x000005        /*32倍增益*/
-#define	GAIN_64                 0x000006        /*64倍增益*/
-#define	GAIN_128                0x000007        /*128倍增益*/
+
 
 /*    GPOCON寄存器，8位，只读,RS2,RS1,RS0=1,0,1;上电/复位=0x00                */
 /*    数据寄存器位功能操作宏定义                                              */
@@ -143,28 +67,13 @@
 /*   +-------------+-----------+--------------+-----------------+----------------+--------------+-----------+-----------+  */
 /*   | 0(0) |BPDSW(0)|GP32EN(0)|GP10EN(0)|P3DAT(0)|P2DAT(0)|P1DAT(0)|P0DAT(0)|  */
 /*   +-------------+-----------+--------------+-----------------+----------------+--------------+-----------+-----------+  */
-#define BPDSW_CLOSE             0x40    /*闭合电桥关断开关*/
-#define	BPDSW_OPEN              0x00    /*断开电桥关断开关*/
-#define	GP32EN                  0x20    /*数字输出P3和P2为有效*/
-#define	GP32DIS                 0x00    /*数字输出P3和P2被忽略*/
-#define	GP10EN                  0x10    /*数字输出P1和P0为有效*/
-#define	GP10DIS                 0x00    /*数字输出P1和P0被忽略*/
-#define	P3DAT_H                 0x08    /*设置P3为高电平*/
-#define	P3DAT_L                 0x00    /*设置P3为低电平*/
-#define	P2DAT_H                 0x04    /*设置P2为高电平*/
-#define	P2DAT_L                 0x00    /*设置P2为低电平*/
-#define	P1DAT_H                 0x02    /*设置P1为高电平*/
-#define	P1DAT_L                 0x00    /*设置P1为低电平*/
-#define	P0DAT_H                 0x01    /*设置P0为高电平*/
-#define	P0DAT_L                 0x00    /*设置P0为低电平*/
 
-#define	NOP                     0x00    /*无操作*/
 
-void AD7190_RST(void); 
-void AD7190_WR_ConfigReg(unsigned char cbyte_2,unsigned char cbyte_1,unsigned char cbyte_0);
-void AD7190_WR_ModeReg(unsigned char cbyte_2,unsigned char cbyte_1,unsigned char cbyte_0);
-void AD7190_WaitRDYGoLow(void);
-double AD7190_ReadDataOnce(void);
-void AD7190_ReadDataContinous(int length);
-void AD7190_ValueConversion(double *Value,int length);
+void AD7190_RST(void); //复位
+void AD7190_WR_ConfigReg(unsigned char cbyte_2,unsigned char cbyte_1,unsigned char cbyte_0);//写配置寄存器
+void AD7190_WR_ModeReg(unsigned char cbyte_2,unsigned char cbyte_1,unsigned char cbyte_0);//写模式寄存器
+void AD7190_WaitRDYGoLow(void);//等待转换就绪
+double AD7190_ReadDataOnce(void);//读一次数据
+void AD7190_ReadDataContinous(int length);//连续读数据
+void AD7190_ValueConversion(double *Value,int length);//数据转换
 #endif

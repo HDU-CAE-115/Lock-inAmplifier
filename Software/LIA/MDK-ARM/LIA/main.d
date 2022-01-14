@@ -40,7 +40,6 @@ lia\main.o: D:\Software\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 lia\main.o: D:\Software\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 lia\main.o: ..\Users\Inc\AD719X.h
 lia\main.o: ..\Users\Inc\Usermain.h
-lia\main.o: ..\Users\Inc\AD719X.h
 lia\main.o: ..\Users\Inc\TpLockInAmp.h
 lia\main.o: ..\Users\Inc\rtwtypes.h
 lia\main.o: ..\Users\Inc\TpLockInAmp_types.h
