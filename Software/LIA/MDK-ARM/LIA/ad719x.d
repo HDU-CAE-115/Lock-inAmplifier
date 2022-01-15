@@ -23,6 +23,8 @@ lia\ad719x.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio_ex.h
 lia\ad719x.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dma.h
 lia\ad719x.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dma_ex.h
 lia\ad719x.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_cortex.h
+lia\ad719x.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dac.h
+lia\ad719x.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dac_ex.h
 lia\ad719x.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h
 lia\ad719x.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h
 lia\ad719x.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h
@@ -37,6 +39,7 @@ lia\ad719x.o: ../Core/Inc/spi.h
 lia\ad719x.o: ../Core/Inc/main.h
 lia\ad719x.o: ..\Users\Inc\Usermain.h
 lia\ad719x.o: ../Core/Inc/gpio.h
+lia\ad719x.o: ../Core/Inc/dac.h
 lia\ad719x.o: ../Core/Inc/usart.h
 lia\ad719x.o: D:\Software\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 lia\ad719x.o: ..\Users\Inc\AD719X.h

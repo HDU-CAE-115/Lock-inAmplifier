@@ -21,6 +21,8 @@ lia\system_stm32g4xx.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio_e
 lia\system_stm32g4xx.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dma.h
 lia\system_stm32g4xx.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dma_ex.h
 lia\system_stm32g4xx.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_cortex.h
+lia\system_stm32g4xx.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dac.h
+lia\system_stm32g4xx.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dac_ex.h
 lia\system_stm32g4xx.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h
 lia\system_stm32g4xx.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h
 lia\system_stm32g4xx.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h

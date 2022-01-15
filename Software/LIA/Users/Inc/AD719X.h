@@ -7,7 +7,7 @@
 #include "Usermain.h"
 
 #define V_REF 2.5
-
+#define MAXDATASIZE 2048
 /*     通讯寄存器8位，只写,RS2,RS1,RS0=0,0,0;                                       */
 /*     通讯寄存器位功能操作宏定义                                                   */
 /*     +------------+------------+------------+------------+------------+---------------+------------+------------+     */
@@ -75,5 +75,5 @@ void AD7190_WR_ModeReg(unsigned char cbyte_2,unsigned char cbyte_1,unsigned char
 void AD7190_WaitRDYGoLow(void);//等待转换就绪
 double AD7190_ReadDataOnce(void);//读一次数据
 void AD7190_ReadDataContinous(int length);//连续读数据
-void AD7190_ValueConversion(double *Value,int length);//数据转换
+void AD7190_ValueConversion(float *Value,int length);//数据转换 //double
 #endif

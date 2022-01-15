@@ -4,6 +4,7 @@
 #include "stdio.h"
 #include "gpio.h"
 #include "spi.h"
+#include "dac.h"
 #include "usart.h"
 #include "math.h"
 #include "AD719X.h"

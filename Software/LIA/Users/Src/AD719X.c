@@ -1,7 +1,7 @@
 #include "AD719X.h"
 
 double value = 0;
-uint32_t AD7190_data[1024] = {0};
+uint32_t AD7190_data[MAXDATASIZE] = {0};
 
 void AD7190_RST(void){
 	unsigned char reset_cmd[7] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
@@ -55,7 +55,7 @@ void AD7190_ReadDataContinous(int length){
 	}
 }
 
-void AD7190_ValueConversion(double *value,int length){
+void AD7190_ValueConversion(float *value,int length){//double
 	for(int i=0; i<length; i++)
 	value[i] = (AD7190_data[i]*5)/pow(2,24) - V_REF;
 }

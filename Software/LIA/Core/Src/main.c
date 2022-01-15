@@ -19,6 +19,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "dac.h"
 #include "spi.h"
 #include "usart.h"
 #include "gpio.h"
@@ -26,6 +27,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "Usermain.h"
+#include "string.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -45,7 +47,9 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+uint8_t RxByte;
+uint8_t RxBuff[1];
+uint16_t Rx_Count;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -88,9 +92,10 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_SPI1_Init();
+  MX_DAC1_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-
+	HAL_UART_Receive_IT(&huart1,RxBuff,1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -159,7 +164,14 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+    if(huart->Instance == USART1)//ÅÐ¶Ï´®¿ÚºÅ
+    {
+			if(RxBuff[0]  == 0x0A) HAL_NVIC_SystemReset();
+			HAL_UART_Receive_IT(&huart1,RxBuff,1);
+		}
+}
 /* USER CODE END 4 */
 
 /**
