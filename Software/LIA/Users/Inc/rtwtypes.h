@@ -3,13 +3,15 @@
  *
  * Code generated for Simulink model 'TpLockInAmp'.
  *
- * Model version                  : 1.6
+ * Model version                  : 1.9
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Thu Jan 13 17:35:16 2022
+ * C/C++ source code generated on : Sun Jan 16 09:32:11 2022
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: Intel->x86-64 (Windows64)
- * Code generation objectives: Unspecified
+ * Embedded hardware selection: ARM Compatible->ARM 7
+ * Code generation objectives:
+ *    1. RAM efficiency
+ *    2. MISRA C:2012 guidelines
  * Validation result: Not run
  */
 
@@ -29,10 +31,10 @@
 
 /*=======================================================================*
  * Target hardware information
- *   Device type: Intel->x86-64 (Windows64)
+ *   Device type: ARM Compatible->ARM 7
  *   Number of bits:     char:   8    short:   16    int:  32
  *                       long:  32
- *                       native word size:  64
+ *                       native word size:  32
  *   Byte ordering: LittleEndian
  *   Signed integer division rounds to: Zero
  *   Shift right on a signed integer as arithmetic shift: on
@@ -57,8 +59,8 @@ typedef double real64_T;
  * Generic type definitions: boolean_T, char_T, byte_T, int_T, uint_T,       *
  *                           real_T, time_T, ulong_T.                        *
  *===========================================================================*/
-typedef float real_T;//double
-typedef float time_T;//double
+typedef double real_T;
+typedef double time_T;
 typedef unsigned char boolean_T;
 typedef int int_T;
 typedef unsigned int uint_T;

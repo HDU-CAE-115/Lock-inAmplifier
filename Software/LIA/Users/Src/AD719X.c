@@ -50,8 +50,6 @@ void AD7190_ReadDataContinous(int length){
 			AD7190_data[i] = (AD7190_data[i] | rdata[1]) << 8;
 			AD7190_data[i] = (AD7190_data[i] | rdata[2]);
 			AD7190_data[i] = AD7190_data[i] & 0x00FFFFFF;//24λ
-			//value = (result*5)/pow(2,24) - V_REF;
-			//return value;
 	}
 }
 

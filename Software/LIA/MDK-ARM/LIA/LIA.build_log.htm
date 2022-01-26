@@ -22,19 +22,21 @@ Dialog DLL:      TCM.DLL V1.53.0.0
  
 <h2>Project:</h2>
 F:\Desktop\Lock-inAmplifier\Software\LIA\MDK-ARM\LIA.uvprojx
-Project File Date:  01/15/2022
+Project File Date:  01/16/2022
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Software\Keil_v5\ARM\ARMCC\Bin'
 Build target 'LIA'
-compiling main.c...
-../Core/Src/main.c(105): warning:  #223-D: function "Usermain" declared implicitly
-  		Usermain();
-../Core/Src/main.c: 1 warning, 0 errors
+compiling Usermain.c...
+..\Users\Src\Usermain.c(37): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  		HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, (signal_output/3.3)*4096);
+..\Users\Src\Usermain.c(58): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  				HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, (signal_output/3.3)*4096);
+..\Users\Src\Usermain.c: 2 warnings, 0 errors
 linking...
-Program Size: Code=28522 RO-data=3190 RW-data=68 ZI-data=26108  
+Program Size: Code=23134 RO-data=3794 RW-data=56 ZI-data=30120  
 FromELF: creating hex file...
-"LIA\LIA.axf" - 0 Error(s), 1 Warning(s).
+"LIA\LIA.axf" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -57,7 +59,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.5.0
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:04
 </pre>
 </body>
 </html>
