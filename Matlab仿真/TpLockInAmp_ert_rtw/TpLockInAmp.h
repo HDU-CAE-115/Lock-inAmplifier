@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'TpLockInAmp'.
  *
- * Model version                  : 1.9
+ * Model version                  : 1.10
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Sun Jan 16 18:42:12 2022
+ * C/C++ source code generated on : Mon Feb 21 21:03:36 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM 7
@@ -36,22 +36,26 @@
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
-  dsp_CICCompensationDecimator__T obj; /* '<S1>/CIC Compensation Decimator' */
-  dsp_CICCompensationDecimato_f_T obj_l;/* '<S1>/CIC Compensation Decimator1' */
+  dsp_CICCompensationDecimator__T obj; /* '<S1>/CIC Compensation Decimator1' */
+  dsp_CICCompensationDecimator__T obj_b;/* '<S1>/CIC Compensation Decimator' */
   real32_T SineWave1_AccFreqNorm;      /* '<S1>/Sine Wave1' */
-  real32_T Buffer_CircBuf[16];         /* '<S1>/Buffer' */
-  real32_T Unbuffer1_CircBuff[2];      /* '<S1>/Unbuffer1' */
+  real32_T Buffer_CircBuf[8];          /* '<S1>/Buffer' */
+  real32_T Buffer2_CircBuf[480];       /* '<S1>/Buffer2' */
   real32_T SineWave2_AccFreqNorm;      /* '<S1>/Sine Wave2' */
-  real32_T Buffer1_CircBuf[16];        /* '<S1>/Buffer1' */
-  real32_T Unbuffer2_CircBuff[2];      /* '<S1>/Unbuffer2' */
+  real32_T Buffer1_CircBuf[8];         /* '<S1>/Buffer1' */
+  real32_T Buffer3_CircBuf[480];       /* '<S1>/Buffer3' */
   int32_T Buffer_inBufPtrIdx;          /* '<S1>/Buffer' */
   int32_T Buffer_outBufPtrIdx;         /* '<S1>/Buffer' */
   int32_T Buffer_bufferLength;         /* '<S1>/Buffer' */
-  int32_T Unbuffer1_memIdx;            /* '<S1>/Unbuffer1' */
+  int32_T Buffer2_inBufPtrIdx;         /* '<S1>/Buffer2' */
+  int32_T Buffer2_outBufPtrIdx;        /* '<S1>/Buffer2' */
+  int32_T Buffer2_bufferLength;        /* '<S1>/Buffer2' */
   int32_T Buffer1_inBufPtrIdx;         /* '<S1>/Buffer1' */
   int32_T Buffer1_outBufPtrIdx;        /* '<S1>/Buffer1' */
   int32_T Buffer1_bufferLength;        /* '<S1>/Buffer1' */
-  int32_T Unbuffer2_memIdx;            /* '<S1>/Unbuffer2' */
+  int32_T Buffer3_inBufPtrIdx;         /* '<S1>/Buffer3' */
+  int32_T Buffer3_outBufPtrIdx;        /* '<S1>/Buffer3' */
+  int32_T Buffer3_bufferLength;        /* '<S1>/Buffer3' */
   boolean_T isInitialized;             /* '<S1>/CIC Compensation Decimator1' */
   boolean_T isInitialized_g;           /* '<S1>/CIC Compensation Decimator' */
 } DW_TpLockInAmp_T;
@@ -67,7 +71,7 @@ struct tag_RTM_TpLockInAmp_T {
    */
   struct {
     struct {
-      uint8_T TID[3];
+      uint16_T TID[3];
     } TaskCounters;
   } Timing;
 };
@@ -88,7 +92,6 @@ extern RT_MODEL_TpLockInAmp_T *const TpLockInAmp_M;
 /* Declaration for custom storage class: Global */
 extern real32_T signal_amp;            /* '<S1>/MATLAB Function' */
 extern real32_T signal_input;          /* '<Root>/In1' */
-extern real32_T signal_pha;            /* '<S1>/Trigonometric Function' */
 
 /*-
  * The generated code includes comments that allow you to trace directly
@@ -107,6 +110,8 @@ extern real32_T signal_pha;            /* '<S1>/Trigonometric Function' */
  * '<Root>' : 'TpLockInAmp'
  * '<S1>'   : 'TpLockInAmp/Subsystem'
  * '<S2>'   : 'TpLockInAmp/Subsystem/MATLAB Function'
+ * '<S3>'   : 'TpLockInAmp/Subsystem/MATLAB Function1'
+ * '<S4>'   : 'TpLockInAmp/Subsystem/MATLAB Function2'
  */
 #endif                                 /* RTW_HEADER_TpLockInAmp_h_ */
 

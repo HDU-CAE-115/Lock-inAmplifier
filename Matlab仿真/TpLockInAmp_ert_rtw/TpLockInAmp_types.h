@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'TpLockInAmp'.
  *
- * Model version                  : 1.9
+ * Model version                  : 1.10
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Sun Jan 16 18:42:12 2022
+ * C/C++ source code generated on : Mon Feb 21 21:03:36 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM 7
@@ -20,36 +20,36 @@
 #include "rtwtypes.h"
 
 /* Model Code Variants */
-#ifndef struct_tag_AdakoEbziPhUkexCdRFXHF
-#define struct_tag_AdakoEbziPhUkexCdRFXHF
+#ifndef struct_tag_72MydC7zUhyq0YzFvTOBKD
+#define struct_tag_72MydC7zUhyq0YzFvTOBKD
 
-struct tag_AdakoEbziPhUkexCdRFXHF
+struct tag_72MydC7zUhyq0YzFvTOBKD
 {
   int32_T S0_isInitialized;
   int32_T W0_PhaseIdx;
   real32_T W1_Sums;
   int32_T W2_CoeffIdx;
-  real32_T W3_StatesBuff[756];
+  real32_T W3_StatesBuff[620];
   int32_T W4_TapDelayIndex;
   int32_T W5_PrevNumChan;
   real32_T P0_IC;
-  real32_T P1_FILT[760];
-  real32_T O0_Y0[2];
+  real32_T P1_FILT[624];
+  real32_T O0_Y0;
 };
 
-#endif                                 /*struct_tag_AdakoEbziPhUkexCdRFXHF*/
+#endif                                 /*struct_tag_72MydC7zUhyq0YzFvTOBKD*/
 
 #ifndef typedef_b_dsp_FIRDecimator_0_TpLockIn_T
 #define typedef_b_dsp_FIRDecimator_0_TpLockIn_T
 
-typedef struct tag_AdakoEbziPhUkexCdRFXHF b_dsp_FIRDecimator_0_TpLockIn_T;
+typedef struct tag_72MydC7zUhyq0YzFvTOBKD b_dsp_FIRDecimator_0_TpLockIn_T;
 
 #endif                               /*typedef_b_dsp_FIRDecimator_0_TpLockIn_T*/
 
-#ifndef struct_tag_g1zp8zYgSNYnAnpVodMzFF
-#define struct_tag_g1zp8zYgSNYnAnpVodMzFF
+#ifndef struct_tag_IsYFv9fviifZeDiBwwUnfC
+#define struct_tag_IsYFv9fviifZeDiBwwUnfC
 
-struct tag_g1zp8zYgSNYnAnpVodMzFF
+struct tag_IsYFv9fviifZeDiBwwUnfC
 {
   boolean_T matlabCodegenIsDeleted;
   int32_T isInitialized;
@@ -57,40 +57,19 @@ struct tag_g1zp8zYgSNYnAnpVodMzFF
   b_dsp_FIRDecimator_0_TpLockIn_T cSFunObject;
 };
 
-#endif                                 /*struct_tag_g1zp8zYgSNYnAnpVodMzFF*/
+#endif                                 /*struct_tag_IsYFv9fviifZeDiBwwUnfC*/
 
 #ifndef typedef_b_dspcodegen_FIRDecimator_TpL_T
 #define typedef_b_dspcodegen_FIRDecimator_TpL_T
 
-typedef struct tag_g1zp8zYgSNYnAnpVodMzFF b_dspcodegen_FIRDecimator_TpL_T;
+typedef struct tag_IsYFv9fviifZeDiBwwUnfC b_dspcodegen_FIRDecimator_TpL_T;
 
 #endif                               /*typedef_b_dspcodegen_FIRDecimator_TpL_T*/
 
-#ifndef struct_tag_VSCvABf4WPVFaZXIVACcwE
-#define struct_tag_VSCvABf4WPVFaZXIVACcwE
+#ifndef struct_tag_Ih36V9BVGVdv8KLOKKO2DB
+#define struct_tag_Ih36V9BVGVdv8KLOKKO2DB
 
-struct tag_VSCvABf4WPVFaZXIVACcwE
-{
-  boolean_T matlabCodegenIsDeleted;
-  int32_T isInitialized;
-  boolean_T isSetupComplete;
-  b_dspcodegen_FIRDecimator_TpL_T *pFIRDecimator;
-  b_dspcodegen_FIRDecimator_TpL_T _pobj0;
-};
-
-#endif                                 /*struct_tag_VSCvABf4WPVFaZXIVACcwE*/
-
-#ifndef typedef_dsp_CICCompensationDecimator__T
-#define typedef_dsp_CICCompensationDecimator__T
-
-typedef struct tag_VSCvABf4WPVFaZXIVACcwE dsp_CICCompensationDecimator__T;
-
-#endif                               /*typedef_dsp_CICCompensationDecimator__T*/
-
-#ifndef struct_tag_YTIVTNT5abK1zmSUSzjpaH
-#define struct_tag_YTIVTNT5abK1zmSUSzjpaH
-
-struct tag_YTIVTNT5abK1zmSUSzjpaH
+struct tag_Ih36V9BVGVdv8KLOKKO2DB
 {
   boolean_T matlabCodegenIsDeleted;
   int32_T isInitialized;
@@ -100,14 +79,14 @@ struct tag_YTIVTNT5abK1zmSUSzjpaH
   b_dspcodegen_FIRDecimator_TpL_T _pobj0;
 };
 
-#endif                                 /*struct_tag_YTIVTNT5abK1zmSUSzjpaH*/
+#endif                                 /*struct_tag_Ih36V9BVGVdv8KLOKKO2DB*/
 
-#ifndef typedef_dsp_CICCompensationDecimato_f_T
-#define typedef_dsp_CICCompensationDecimato_f_T
+#ifndef typedef_dsp_CICCompensationDecimator__T
+#define typedef_dsp_CICCompensationDecimator__T
 
-typedef struct tag_YTIVTNT5abK1zmSUSzjpaH dsp_CICCompensationDecimato_f_T;
+typedef struct tag_Ih36V9BVGVdv8KLOKKO2DB dsp_CICCompensationDecimator__T;
 
-#endif                               /*typedef_dsp_CICCompensationDecimato_f_T*/
+#endif                               /*typedef_dsp_CICCompensationDecimator__T*/
 
 /* Forward declaration for rtModel */
 typedef struct tag_RTM_TpLockInAmp_T RT_MODEL_TpLockInAmp_T;

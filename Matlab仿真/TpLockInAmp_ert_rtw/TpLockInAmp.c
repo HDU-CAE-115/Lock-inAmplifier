@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'TpLockInAmp'.
  *
- * Model version                  : 1.9
+ * Model version                  : 1.10
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Sun Jan 16 18:42:12 2022
+ * C/C++ source code generated on : Mon Feb 21 21:03:36 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM 7
@@ -30,7 +30,6 @@ RT_MODEL_TpLockInAmp_T *const TpLockInAmp_M = &TpLockInAmp_M_;
 /* Definition for custom storage class: Global */
 real32_T signal_amp;                   /* '<S1>/MATLAB Function' */
 real32_T signal_input;                 /* '<Root>/In1' */
-real32_T signal_pha;                   /* '<S1>/Trigonometric Function' */
 static void rate_scheduler(void);
 
 /*
@@ -51,10 +50,26 @@ static void rate_scheduler(void)
   }
 
   (TpLockInAmp_M->Timing.TaskCounters.TID[2])++;
-  if ((TpLockInAmp_M->Timing.TaskCounters.TID[2]) > 7) {
-                               /* Sample time: [0.0083333333333333332s, 0.0s] */
+  if ((TpLockInAmp_M->Timing.TaskCounters.TID[2]) > 239) {/* Sample time: [0.25s, 0.0s] */
     TpLockInAmp_M->Timing.TaskCounters.TID[2] = 0;
   }
+}
+
+/*
+ * Output and update for atomic system:
+ *    '<S1>/MATLAB Function1'
+ *    '<S1>/MATLAB Function2'
+ */
+void TpLockInAmp_MATLABFunction1(const real32_T rtu_x[240], real32_T *rty_y)
+{
+  int32_T k;
+  real32_T x;
+  x = rtu_x[0];
+  for (k = 0; k < 239; k++) {
+    x += rtu_x[k + 1];
+  }
+
+  *rty_y = x / 240.0F;
 }
 
 /* Model step function */
@@ -62,18 +77,17 @@ void TpLockInAmp_step(void)
 {
   b_dsp_FIRDecimator_0_TpLockIn_T *obj_0;
   b_dspcodegen_FIRDecimator_TpL_T *obj;
-  int32_T cffIdx;
   int32_T i;
   int32_T jIdx;
-  int32_T maxWindow;
   int32_T nSamps;
   int32_T nSampsAtBot;
   int32_T offsetFromMemBase;
-  int32_T outBufIdx;
-  real32_T rtb_Buffer[8];
-  real32_T rtb_Buffer1[8];
+  real32_T rtb_Buffer2[240];
+  real32_T rtb_Buffer3[240];
+  real32_T rtb_Buffer[4];
+  real32_T rtb_Buffer1[4];
   real32_T rtb_SineWave2;
-  real32_T rtb_Unbuffer1;
+  real32_T rtb_y_n;
 
   /* S-Function (sdspsine2): '<S1>/Sine Wave1' */
   rtb_SineWave2 = sinf(TpLockInAmp_DW.SineWave1_AccFreqNorm);
@@ -97,10 +111,10 @@ void TpLockInAmp_step(void)
   rtb_SineWave2 *= signal_input;
 
   /* Buffer: '<S1>/Buffer' */
-  nSamps = 16;
+  nSamps = 8;
   offsetFromMemBase = TpLockInAmp_DW.Buffer_inBufPtrIdx;
-  if (16 - TpLockInAmp_DW.Buffer_inBufPtrIdx <= 1) {
-    for (i = 0; i < 16 - TpLockInAmp_DW.Buffer_inBufPtrIdx; i++) {
+  if (8 - TpLockInAmp_DW.Buffer_inBufPtrIdx <= 1) {
+    for (i = 0; i < 8 - TpLockInAmp_DW.Buffer_inBufPtrIdx; i++) {
       TpLockInAmp_DW.Buffer_CircBuf[TpLockInAmp_DW.Buffer_inBufPtrIdx + i] =
         rtb_SineWave2;
     }
@@ -109,32 +123,32 @@ void TpLockInAmp_step(void)
     nSamps = TpLockInAmp_DW.Buffer_inBufPtrIdx;
   }
 
-  for (i = 0; i < nSamps - 15; i++) {
+  for (i = 0; i < nSamps - 7; i++) {
     TpLockInAmp_DW.Buffer_CircBuf[offsetFromMemBase + i] = rtb_SineWave2;
   }
 
   TpLockInAmp_DW.Buffer_inBufPtrIdx++;
-  if (TpLockInAmp_DW.Buffer_inBufPtrIdx >= 16) {
-    TpLockInAmp_DW.Buffer_inBufPtrIdx -= 16;
+  if (TpLockInAmp_DW.Buffer_inBufPtrIdx >= 8) {
+    TpLockInAmp_DW.Buffer_inBufPtrIdx -= 8;
   }
 
   TpLockInAmp_DW.Buffer_bufferLength++;
-  if (TpLockInAmp_DW.Buffer_bufferLength > 16) {
+  if (TpLockInAmp_DW.Buffer_bufferLength > 8) {
     TpLockInAmp_DW.Buffer_outBufPtrIdx = (TpLockInAmp_DW.Buffer_outBufPtrIdx +
-      TpLockInAmp_DW.Buffer_bufferLength) - 16;
-    if (TpLockInAmp_DW.Buffer_outBufPtrIdx > 16) {
-      TpLockInAmp_DW.Buffer_outBufPtrIdx -= 16;
+      TpLockInAmp_DW.Buffer_bufferLength) - 8;
+    if (TpLockInAmp_DW.Buffer_outBufPtrIdx > 8) {
+      TpLockInAmp_DW.Buffer_outBufPtrIdx -= 8;
     }
 
-    TpLockInAmp_DW.Buffer_bufferLength = 16;
+    TpLockInAmp_DW.Buffer_bufferLength = 8;
   }
 
-  if (TpLockInAmp_M->Timing.TaskCounters.TID[2] == 0) {
-    TpLockInAmp_DW.Buffer_bufferLength -= 8;
+  if (TpLockInAmp_M->Timing.TaskCounters.TID[1] == 0) {
+    TpLockInAmp_DW.Buffer_bufferLength -= 4;
     if (TpLockInAmp_DW.Buffer_bufferLength < 0) {
       TpLockInAmp_DW.Buffer_outBufPtrIdx += TpLockInAmp_DW.Buffer_bufferLength;
       if (TpLockInAmp_DW.Buffer_outBufPtrIdx < 0) {
-        TpLockInAmp_DW.Buffer_outBufPtrIdx += 16;
+        TpLockInAmp_DW.Buffer_outBufPtrIdx += 8;
       }
 
       TpLockInAmp_DW.Buffer_bufferLength = 0;
@@ -142,20 +156,20 @@ void TpLockInAmp_step(void)
 
     offsetFromMemBase = 0;
     if (TpLockInAmp_DW.Buffer_outBufPtrIdx < 0) {
-      TpLockInAmp_DW.Buffer_outBufPtrIdx += 16;
+      TpLockInAmp_DW.Buffer_outBufPtrIdx += 8;
     }
 
-    nSampsAtBot = 16 - TpLockInAmp_DW.Buffer_outBufPtrIdx;
-    nSamps = 8;
-    if (16 - TpLockInAmp_DW.Buffer_outBufPtrIdx <= 8) {
-      for (i = 0; i < 16 - TpLockInAmp_DW.Buffer_outBufPtrIdx; i++) {
+    nSampsAtBot = 8 - TpLockInAmp_DW.Buffer_outBufPtrIdx;
+    nSamps = 4;
+    if (8 - TpLockInAmp_DW.Buffer_outBufPtrIdx <= 4) {
+      for (i = 0; i < 8 - TpLockInAmp_DW.Buffer_outBufPtrIdx; i++) {
         rtb_Buffer[i] =
           TpLockInAmp_DW.Buffer_CircBuf[TpLockInAmp_DW.Buffer_outBufPtrIdx + i];
       }
 
-      offsetFromMemBase = 16 - TpLockInAmp_DW.Buffer_outBufPtrIdx;
+      offsetFromMemBase = 8 - TpLockInAmp_DW.Buffer_outBufPtrIdx;
       TpLockInAmp_DW.Buffer_outBufPtrIdx = 0;
-      nSamps = 8 - nSampsAtBot;
+      nSamps = 4 - nSampsAtBot;
     }
 
     for (i = 0; i < nSamps; i++) {
@@ -168,18 +182,18 @@ void TpLockInAmp_step(void)
     /* MATLABSystem: '<S1>/CIC Compensation Decimator' incorporates:
      *  Buffer: '<S1>/Buffer'
      */
-    obj = TpLockInAmp_DW.obj.pFIRDecimator;
+    obj = TpLockInAmp_DW.obj_b.pFIRDecimator;
     if (obj->isInitialized != 1) {
       obj->isSetupComplete = false;
       obj->isInitialized = 1;
       obj->isSetupComplete = true;
 
       /* System object Initialization function: dsp.FIRDecimator */
-      obj->cSFunObject.W2_CoeffIdx = 570;
+      obj->cSFunObject.W2_CoeffIdx = 468;
       obj->cSFunObject.W0_PhaseIdx = 3;
-      obj->cSFunObject.W4_TapDelayIndex = 567;
+      obj->cSFunObject.W4_TapDelayIndex = 465;
       obj->cSFunObject.W1_Sums = 0.0F;
-      for (i = 0; i < 756; i++) {
+      for (i = 0; i < 620; i++) {
         obj->cSFunObject.W3_StatesBuff[i] = 0.0F;
       }
     }
@@ -187,71 +201,242 @@ void TpLockInAmp_step(void)
     obj_0 = &obj->cSFunObject;
 
     /* System object Outputs function: dsp.FIRDecimator */
-    nSamps = 0;
-    offsetFromMemBase = obj->cSFunObject.W4_TapDelayIndex;
-    nSampsAtBot = obj->cSFunObject.W0_PhaseIdx;
-    cffIdx = obj->cSFunObject.W2_CoeffIdx;
-    outBufIdx = 0;
-    maxWindow = (nSampsAtBot + 1) * 189 - 189;
-    for (i = 0; i < 8; i++) {
-      obj_0->W1_Sums += rtb_Buffer[nSamps] * obj_0->P1_FILT[cffIdx];
-      cffIdx++;
-      for (jIdx = offsetFromMemBase + 1; jIdx < maxWindow + 189; jIdx++) {
-        obj_0->W1_Sums += obj_0->W3_StatesBuff[jIdx] * obj_0->P1_FILT[cffIdx];
-        cffIdx++;
+    i = obj->cSFunObject.W4_TapDelayIndex;
+    nSamps = obj->cSFunObject.W0_PhaseIdx;
+    offsetFromMemBase = obj->cSFunObject.W2_CoeffIdx;
+    nSampsAtBot = (nSamps + 1) * 155 - 155;
+    obj->cSFunObject.W1_Sums += rtb_Buffer[0] * obj->
+      cSFunObject.P1_FILT[offsetFromMemBase];
+    offsetFromMemBase++;
+    for (jIdx = i + 1; jIdx < nSampsAtBot + 155; jIdx++) {
+      obj_0->W1_Sums += obj_0->W3_StatesBuff[jIdx] * obj_0->
+        P1_FILT[offsetFromMemBase];
+      offsetFromMemBase++;
+    }
+
+    for (jIdx = nSampsAtBot; jIdx <= i; jIdx++) {
+      obj_0->W1_Sums += obj_0->W3_StatesBuff[jIdx] * obj_0->
+        P1_FILT[offsetFromMemBase];
+      offsetFromMemBase++;
+    }
+
+    obj->cSFunObject.W3_StatesBuff[i] = rtb_Buffer[0];
+    i += 155;
+    if (i >= 620) {
+      i -= 620;
+    }
+
+    nSamps++;
+    if (nSamps < 4) {
+      nSampsAtBot += 155;
+    } else {
+      obj->cSFunObject.O0_Y0 = obj->cSFunObject.W1_Sums;
+      obj->cSFunObject.W1_Sums = 0.0F;
+      nSamps = 0;
+      offsetFromMemBase = 0;
+      i--;
+      if (i < 0) {
+        i += 155;
       }
 
-      for (jIdx = maxWindow; jIdx <= offsetFromMemBase; jIdx++) {
-        obj_0->W1_Sums += obj_0->W3_StatesBuff[jIdx] * obj_0->P1_FILT[cffIdx];
-        cffIdx++;
+      nSampsAtBot = 0;
+    }
+
+    obj->cSFunObject.W1_Sums += rtb_Buffer[1] * obj->
+      cSFunObject.P1_FILT[offsetFromMemBase];
+    offsetFromMemBase++;
+    for (jIdx = i + 1; jIdx < nSampsAtBot + 155; jIdx++) {
+      obj_0->W1_Sums += obj_0->W3_StatesBuff[jIdx] * obj_0->
+        P1_FILT[offsetFromMemBase];
+      offsetFromMemBase++;
+    }
+
+    for (jIdx = nSampsAtBot; jIdx <= i; jIdx++) {
+      obj_0->W1_Sums += obj_0->W3_StatesBuff[jIdx] * obj_0->
+        P1_FILT[offsetFromMemBase];
+      offsetFromMemBase++;
+    }
+
+    obj->cSFunObject.W3_StatesBuff[i] = rtb_Buffer[1];
+    i += 155;
+    if (i >= 620) {
+      i -= 620;
+    }
+
+    nSamps++;
+    if (nSamps < 4) {
+      nSampsAtBot += 155;
+    } else {
+      obj->cSFunObject.O0_Y0 = obj->cSFunObject.W1_Sums;
+      obj->cSFunObject.W1_Sums = 0.0F;
+      nSamps = 0;
+      offsetFromMemBase = 0;
+      i--;
+      if (i < 0) {
+        i += 155;
       }
 
-      obj_0->W3_StatesBuff[offsetFromMemBase] = rtb_Buffer[nSamps];
-      nSamps++;
-      offsetFromMemBase += 189;
-      if (offsetFromMemBase >= 756) {
-        offsetFromMemBase -= 756;
+      nSampsAtBot = 0;
+    }
+
+    obj->cSFunObject.W1_Sums += rtb_Buffer[2] * obj->
+      cSFunObject.P1_FILT[offsetFromMemBase];
+    offsetFromMemBase++;
+    for (jIdx = i + 1; jIdx < nSampsAtBot + 155; jIdx++) {
+      obj_0->W1_Sums += obj_0->W3_StatesBuff[jIdx] * obj_0->
+        P1_FILT[offsetFromMemBase];
+      offsetFromMemBase++;
+    }
+
+    for (jIdx = nSampsAtBot; jIdx <= i; jIdx++) {
+      obj_0->W1_Sums += obj_0->W3_StatesBuff[jIdx] * obj_0->
+        P1_FILT[offsetFromMemBase];
+      offsetFromMemBase++;
+    }
+
+    obj->cSFunObject.W3_StatesBuff[i] = rtb_Buffer[2];
+    i += 155;
+    if (i >= 620) {
+      i -= 620;
+    }
+
+    nSamps++;
+    if (nSamps < 4) {
+      nSampsAtBot += 155;
+    } else {
+      obj->cSFunObject.O0_Y0 = obj->cSFunObject.W1_Sums;
+      obj->cSFunObject.W1_Sums = 0.0F;
+      nSamps = 0;
+      offsetFromMemBase = 0;
+      i--;
+      if (i < 0) {
+        i += 155;
       }
 
-      nSampsAtBot++;
-      if (nSampsAtBot < 4) {
-        maxWindow += 189;
-      } else {
-        obj_0->O0_Y0[outBufIdx] = obj_0->W1_Sums;
-        outBufIdx++;
-        obj_0->W1_Sums = 0.0F;
-        nSampsAtBot = 0;
-        cffIdx = 0;
-        offsetFromMemBase--;
-        if (offsetFromMemBase < 0) {
-          offsetFromMemBase += 189;
-        }
+      nSampsAtBot = 0;
+    }
 
-        maxWindow = 0;
+    obj->cSFunObject.W1_Sums += rtb_Buffer[3] * obj->
+      cSFunObject.P1_FILT[offsetFromMemBase];
+    offsetFromMemBase++;
+    for (jIdx = i + 1; jIdx < nSampsAtBot + 155; jIdx++) {
+      obj_0->W1_Sums += obj_0->W3_StatesBuff[jIdx] * obj_0->
+        P1_FILT[offsetFromMemBase];
+      offsetFromMemBase++;
+    }
+
+    for (jIdx = nSampsAtBot; jIdx <= i; jIdx++) {
+      obj_0->W1_Sums += obj_0->W3_StatesBuff[jIdx] * obj_0->
+        P1_FILT[offsetFromMemBase];
+      offsetFromMemBase++;
+    }
+
+    obj->cSFunObject.W3_StatesBuff[i] = rtb_Buffer[3];
+    i += 155;
+    if (i >= 620) {
+      i -= 620;
+    }
+
+    nSamps++;
+    if (nSamps >= 4) {
+      obj->cSFunObject.O0_Y0 = obj->cSFunObject.W1_Sums;
+      obj->cSFunObject.W1_Sums = 0.0F;
+      nSamps = 0;
+      offsetFromMemBase = 0;
+      i--;
+      if (i < 0) {
+        i += 155;
       }
     }
 
-    obj->cSFunObject.W4_TapDelayIndex = offsetFromMemBase;
-    obj->cSFunObject.W2_CoeffIdx = cffIdx;
-    obj->cSFunObject.W0_PhaseIdx = nSampsAtBot;
+    obj->cSFunObject.W4_TapDelayIndex = i;
+    obj->cSFunObject.W2_CoeffIdx = offsetFromMemBase;
+    obj->cSFunObject.W0_PhaseIdx = nSamps;
+    rtb_SineWave2 = obj->cSFunObject.O0_Y0;
 
-    /* Unbuffer: '<S1>/Unbuffer1' incorporates:
+    /* Buffer: '<S1>/Buffer2' incorporates:
      *  MATLABSystem: '<S1>/CIC Compensation Decimator'
      */
-    TpLockInAmp_DW.Unbuffer1_CircBuff[0] = obj->cSFunObject.O0_Y0[0];
-    TpLockInAmp_DW.Unbuffer1_CircBuff[1] = obj->cSFunObject.O0_Y0[1];
-    TpLockInAmp_DW.Unbuffer1_memIdx = 0;
+    nSamps = 480;
+    offsetFromMemBase = TpLockInAmp_DW.Buffer2_inBufPtrIdx;
+    if (480 - TpLockInAmp_DW.Buffer2_inBufPtrIdx <= 1) {
+      for (i = 0; i < 480 - TpLockInAmp_DW.Buffer2_inBufPtrIdx; i++) {
+        TpLockInAmp_DW.Buffer2_CircBuf[TpLockInAmp_DW.Buffer2_inBufPtrIdx + i] =
+          rtb_SineWave2;
+      }
+
+      offsetFromMemBase = 0;
+      nSamps = TpLockInAmp_DW.Buffer2_inBufPtrIdx;
+    }
+
+    for (i = 0; i < nSamps - 479; i++) {
+      TpLockInAmp_DW.Buffer2_CircBuf[offsetFromMemBase + i] = rtb_SineWave2;
+    }
+
+    TpLockInAmp_DW.Buffer2_inBufPtrIdx++;
+    if (TpLockInAmp_DW.Buffer2_inBufPtrIdx >= 480) {
+      TpLockInAmp_DW.Buffer2_inBufPtrIdx -= 480;
+    }
+
+    TpLockInAmp_DW.Buffer2_bufferLength++;
+    if (TpLockInAmp_DW.Buffer2_bufferLength > 480) {
+      TpLockInAmp_DW.Buffer2_outBufPtrIdx = (TpLockInAmp_DW.Buffer2_outBufPtrIdx
+        + TpLockInAmp_DW.Buffer2_bufferLength) - 480;
+      if (TpLockInAmp_DW.Buffer2_outBufPtrIdx > 480) {
+        TpLockInAmp_DW.Buffer2_outBufPtrIdx -= 480;
+      }
+
+      TpLockInAmp_DW.Buffer2_bufferLength = 480;
+    }
   }
 
   /* End of Buffer: '<S1>/Buffer' */
 
-  /* Unbuffer: '<S1>/Unbuffer1' */
-  if (TpLockInAmp_M->Timing.TaskCounters.TID[1] == 0) {
-    rtb_Unbuffer1 =
-      TpLockInAmp_DW.Unbuffer1_CircBuff[TpLockInAmp_DW.Unbuffer1_memIdx];
-    if (TpLockInAmp_DW.Unbuffer1_memIdx < 1) {
-      TpLockInAmp_DW.Unbuffer1_memIdx++;
+  /* Buffer: '<S1>/Buffer2' */
+  if (TpLockInAmp_M->Timing.TaskCounters.TID[2] == 0) {
+    TpLockInAmp_DW.Buffer2_bufferLength -= 60;
+    if (TpLockInAmp_DW.Buffer2_bufferLength < 180) {
+      TpLockInAmp_DW.Buffer2_outBufPtrIdx = (TpLockInAmp_DW.Buffer2_outBufPtrIdx
+        + TpLockInAmp_DW.Buffer2_bufferLength) - 180;
+      if (TpLockInAmp_DW.Buffer2_outBufPtrIdx < 0) {
+        TpLockInAmp_DW.Buffer2_outBufPtrIdx += 480;
+      }
+
+      TpLockInAmp_DW.Buffer2_bufferLength = 180;
     }
+
+    offsetFromMemBase = 0;
+    jIdx = TpLockInAmp_DW.Buffer2_outBufPtrIdx - 180;
+    if (TpLockInAmp_DW.Buffer2_outBufPtrIdx - 180 < 0) {
+      jIdx = TpLockInAmp_DW.Buffer2_outBufPtrIdx + 300;
+    }
+
+    nSampsAtBot = 480 - jIdx;
+    nSamps = 240;
+    if (480 - jIdx <= 240) {
+      for (i = 0; i < 480 - jIdx; i++) {
+        rtb_Buffer2[i] = TpLockInAmp_DW.Buffer2_CircBuf[jIdx + i];
+      }
+
+      offsetFromMemBase = 480 - jIdx;
+      jIdx = 0;
+      nSamps = 240 - nSampsAtBot;
+    }
+
+    for (i = 0; i < nSamps; i++) {
+      rtb_Buffer2[offsetFromMemBase + i] = TpLockInAmp_DW.Buffer2_CircBuf[jIdx +
+        i];
+    }
+
+    TpLockInAmp_DW.Buffer2_outBufPtrIdx = jIdx + nSamps;
+
+    /* MATLAB Function: '<S1>/MATLAB Function1' incorporates:
+     *  Buffer: '<S1>/Buffer2'
+     */
+    TpLockInAmp_MATLABFunction1(rtb_Buffer2, &rtb_y_n);
+
+    /* Product: '<S1>/Product2' */
+    rtb_y_n *= rtb_y_n;
   }
 
   /* S-Function (sdspsine2): '<S1>/Sine Wave2' */
@@ -276,10 +461,10 @@ void TpLockInAmp_step(void)
   rtb_SineWave2 *= signal_input;
 
   /* Buffer: '<S1>/Buffer1' */
-  nSamps = 16;
+  nSamps = 8;
   offsetFromMemBase = TpLockInAmp_DW.Buffer1_inBufPtrIdx;
-  if (16 - TpLockInAmp_DW.Buffer1_inBufPtrIdx <= 1) {
-    for (i = 0; i < 16 - TpLockInAmp_DW.Buffer1_inBufPtrIdx; i++) {
+  if (8 - TpLockInAmp_DW.Buffer1_inBufPtrIdx <= 1) {
+    for (i = 0; i < 8 - TpLockInAmp_DW.Buffer1_inBufPtrIdx; i++) {
       TpLockInAmp_DW.Buffer1_CircBuf[TpLockInAmp_DW.Buffer1_inBufPtrIdx + i] =
         rtb_SineWave2;
     }
@@ -288,32 +473,32 @@ void TpLockInAmp_step(void)
     nSamps = TpLockInAmp_DW.Buffer1_inBufPtrIdx;
   }
 
-  for (i = 0; i < nSamps - 15; i++) {
+  for (i = 0; i < nSamps - 7; i++) {
     TpLockInAmp_DW.Buffer1_CircBuf[offsetFromMemBase + i] = rtb_SineWave2;
   }
 
   TpLockInAmp_DW.Buffer1_inBufPtrIdx++;
-  if (TpLockInAmp_DW.Buffer1_inBufPtrIdx >= 16) {
-    TpLockInAmp_DW.Buffer1_inBufPtrIdx -= 16;
+  if (TpLockInAmp_DW.Buffer1_inBufPtrIdx >= 8) {
+    TpLockInAmp_DW.Buffer1_inBufPtrIdx -= 8;
   }
 
   TpLockInAmp_DW.Buffer1_bufferLength++;
-  if (TpLockInAmp_DW.Buffer1_bufferLength > 16) {
+  if (TpLockInAmp_DW.Buffer1_bufferLength > 8) {
     TpLockInAmp_DW.Buffer1_outBufPtrIdx = (TpLockInAmp_DW.Buffer1_outBufPtrIdx +
-      TpLockInAmp_DW.Buffer1_bufferLength) - 16;
-    if (TpLockInAmp_DW.Buffer1_outBufPtrIdx > 16) {
-      TpLockInAmp_DW.Buffer1_outBufPtrIdx -= 16;
+      TpLockInAmp_DW.Buffer1_bufferLength) - 8;
+    if (TpLockInAmp_DW.Buffer1_outBufPtrIdx > 8) {
+      TpLockInAmp_DW.Buffer1_outBufPtrIdx -= 8;
     }
 
-    TpLockInAmp_DW.Buffer1_bufferLength = 16;
+    TpLockInAmp_DW.Buffer1_bufferLength = 8;
   }
 
-  if (TpLockInAmp_M->Timing.TaskCounters.TID[2] == 0) {
-    TpLockInAmp_DW.Buffer1_bufferLength -= 8;
+  if (TpLockInAmp_M->Timing.TaskCounters.TID[1] == 0) {
+    TpLockInAmp_DW.Buffer1_bufferLength -= 4;
     if (TpLockInAmp_DW.Buffer1_bufferLength < 0) {
       TpLockInAmp_DW.Buffer1_outBufPtrIdx += TpLockInAmp_DW.Buffer1_bufferLength;
       if (TpLockInAmp_DW.Buffer1_outBufPtrIdx < 0) {
-        TpLockInAmp_DW.Buffer1_outBufPtrIdx += 16;
+        TpLockInAmp_DW.Buffer1_outBufPtrIdx += 8;
       }
 
       TpLockInAmp_DW.Buffer1_bufferLength = 0;
@@ -321,20 +506,20 @@ void TpLockInAmp_step(void)
 
     offsetFromMemBase = 0;
     if (TpLockInAmp_DW.Buffer1_outBufPtrIdx < 0) {
-      TpLockInAmp_DW.Buffer1_outBufPtrIdx += 16;
+      TpLockInAmp_DW.Buffer1_outBufPtrIdx += 8;
     }
 
-    nSampsAtBot = 16 - TpLockInAmp_DW.Buffer1_outBufPtrIdx;
-    nSamps = 8;
-    if (16 - TpLockInAmp_DW.Buffer1_outBufPtrIdx <= 8) {
-      for (i = 0; i < 16 - TpLockInAmp_DW.Buffer1_outBufPtrIdx; i++) {
+    nSampsAtBot = 8 - TpLockInAmp_DW.Buffer1_outBufPtrIdx;
+    nSamps = 4;
+    if (8 - TpLockInAmp_DW.Buffer1_outBufPtrIdx <= 4) {
+      for (i = 0; i < 8 - TpLockInAmp_DW.Buffer1_outBufPtrIdx; i++) {
         rtb_Buffer1[i] =
           TpLockInAmp_DW.Buffer1_CircBuf[TpLockInAmp_DW.Buffer1_outBufPtrIdx + i];
       }
 
-      offsetFromMemBase = 16 - TpLockInAmp_DW.Buffer1_outBufPtrIdx;
+      offsetFromMemBase = 8 - TpLockInAmp_DW.Buffer1_outBufPtrIdx;
       TpLockInAmp_DW.Buffer1_outBufPtrIdx = 0;
-      nSamps = 8 - nSampsAtBot;
+      nSamps = 4 - nSampsAtBot;
     }
 
     for (i = 0; i < nSamps; i++) {
@@ -347,18 +532,18 @@ void TpLockInAmp_step(void)
     /* MATLABSystem: '<S1>/CIC Compensation Decimator1' incorporates:
      *  Buffer: '<S1>/Buffer1'
      */
-    obj = TpLockInAmp_DW.obj_l.pFIRDecimator;
+    obj = TpLockInAmp_DW.obj.pFIRDecimator;
     if (obj->isInitialized != 1) {
       obj->isSetupComplete = false;
       obj->isInitialized = 1;
       obj->isSetupComplete = true;
 
       /* System object Initialization function: dsp.FIRDecimator */
-      obj->cSFunObject.W2_CoeffIdx = 570;
+      obj->cSFunObject.W2_CoeffIdx = 468;
       obj->cSFunObject.W0_PhaseIdx = 3;
-      obj->cSFunObject.W4_TapDelayIndex = 567;
+      obj->cSFunObject.W4_TapDelayIndex = 465;
       obj->cSFunObject.W1_Sums = 0.0F;
-      for (i = 0; i < 756; i++) {
+      for (i = 0; i < 620; i++) {
         obj->cSFunObject.W3_StatesBuff[i] = 0.0F;
       }
     }
@@ -366,84 +551,245 @@ void TpLockInAmp_step(void)
     obj_0 = &obj->cSFunObject;
 
     /* System object Outputs function: dsp.FIRDecimator */
-    nSamps = 0;
-    offsetFromMemBase = obj->cSFunObject.W4_TapDelayIndex;
-    nSampsAtBot = obj->cSFunObject.W0_PhaseIdx;
-    cffIdx = obj->cSFunObject.W2_CoeffIdx;
-    outBufIdx = 0;
-    maxWindow = (nSampsAtBot + 1) * 189 - 189;
-    for (i = 0; i < 8; i++) {
-      obj_0->W1_Sums += rtb_Buffer1[nSamps] * obj_0->P1_FILT[cffIdx];
-      cffIdx++;
-      for (jIdx = offsetFromMemBase + 1; jIdx < maxWindow + 189; jIdx++) {
-        obj_0->W1_Sums += obj_0->W3_StatesBuff[jIdx] * obj_0->P1_FILT[cffIdx];
-        cffIdx++;
+    i = obj->cSFunObject.W4_TapDelayIndex;
+    nSamps = obj->cSFunObject.W0_PhaseIdx;
+    offsetFromMemBase = obj->cSFunObject.W2_CoeffIdx;
+    nSampsAtBot = (nSamps + 1) * 155 - 155;
+    obj->cSFunObject.W1_Sums += rtb_Buffer1[0] * obj->
+      cSFunObject.P1_FILT[offsetFromMemBase];
+    offsetFromMemBase++;
+    for (jIdx = i + 1; jIdx < nSampsAtBot + 155; jIdx++) {
+      obj_0->W1_Sums += obj_0->W3_StatesBuff[jIdx] * obj_0->
+        P1_FILT[offsetFromMemBase];
+      offsetFromMemBase++;
+    }
+
+    for (jIdx = nSampsAtBot; jIdx <= i; jIdx++) {
+      obj_0->W1_Sums += obj_0->W3_StatesBuff[jIdx] * obj_0->
+        P1_FILT[offsetFromMemBase];
+      offsetFromMemBase++;
+    }
+
+    obj->cSFunObject.W3_StatesBuff[i] = rtb_Buffer1[0];
+    i += 155;
+    if (i >= 620) {
+      i -= 620;
+    }
+
+    nSamps++;
+    if (nSamps < 4) {
+      nSampsAtBot += 155;
+    } else {
+      obj->cSFunObject.O0_Y0 = obj->cSFunObject.W1_Sums;
+      obj->cSFunObject.W1_Sums = 0.0F;
+      nSamps = 0;
+      offsetFromMemBase = 0;
+      i--;
+      if (i < 0) {
+        i += 155;
       }
 
-      for (jIdx = maxWindow; jIdx <= offsetFromMemBase; jIdx++) {
-        obj_0->W1_Sums += obj_0->W3_StatesBuff[jIdx] * obj_0->P1_FILT[cffIdx];
-        cffIdx++;
+      nSampsAtBot = 0;
+    }
+
+    obj->cSFunObject.W1_Sums += rtb_Buffer1[1] * obj->
+      cSFunObject.P1_FILT[offsetFromMemBase];
+    offsetFromMemBase++;
+    for (jIdx = i + 1; jIdx < nSampsAtBot + 155; jIdx++) {
+      obj_0->W1_Sums += obj_0->W3_StatesBuff[jIdx] * obj_0->
+        P1_FILT[offsetFromMemBase];
+      offsetFromMemBase++;
+    }
+
+    for (jIdx = nSampsAtBot; jIdx <= i; jIdx++) {
+      obj_0->W1_Sums += obj_0->W3_StatesBuff[jIdx] * obj_0->
+        P1_FILT[offsetFromMemBase];
+      offsetFromMemBase++;
+    }
+
+    obj->cSFunObject.W3_StatesBuff[i] = rtb_Buffer1[1];
+    i += 155;
+    if (i >= 620) {
+      i -= 620;
+    }
+
+    nSamps++;
+    if (nSamps < 4) {
+      nSampsAtBot += 155;
+    } else {
+      obj->cSFunObject.O0_Y0 = obj->cSFunObject.W1_Sums;
+      obj->cSFunObject.W1_Sums = 0.0F;
+      nSamps = 0;
+      offsetFromMemBase = 0;
+      i--;
+      if (i < 0) {
+        i += 155;
       }
 
-      obj_0->W3_StatesBuff[offsetFromMemBase] = rtb_Buffer1[nSamps];
-      nSamps++;
-      offsetFromMemBase += 189;
-      if (offsetFromMemBase >= 756) {
-        offsetFromMemBase -= 756;
+      nSampsAtBot = 0;
+    }
+
+    obj->cSFunObject.W1_Sums += rtb_Buffer1[2] * obj->
+      cSFunObject.P1_FILT[offsetFromMemBase];
+    offsetFromMemBase++;
+    for (jIdx = i + 1; jIdx < nSampsAtBot + 155; jIdx++) {
+      obj_0->W1_Sums += obj_0->W3_StatesBuff[jIdx] * obj_0->
+        P1_FILT[offsetFromMemBase];
+      offsetFromMemBase++;
+    }
+
+    for (jIdx = nSampsAtBot; jIdx <= i; jIdx++) {
+      obj_0->W1_Sums += obj_0->W3_StatesBuff[jIdx] * obj_0->
+        P1_FILT[offsetFromMemBase];
+      offsetFromMemBase++;
+    }
+
+    obj->cSFunObject.W3_StatesBuff[i] = rtb_Buffer1[2];
+    i += 155;
+    if (i >= 620) {
+      i -= 620;
+    }
+
+    nSamps++;
+    if (nSamps < 4) {
+      nSampsAtBot += 155;
+    } else {
+      obj->cSFunObject.O0_Y0 = obj->cSFunObject.W1_Sums;
+      obj->cSFunObject.W1_Sums = 0.0F;
+      nSamps = 0;
+      offsetFromMemBase = 0;
+      i--;
+      if (i < 0) {
+        i += 155;
       }
 
-      nSampsAtBot++;
-      if (nSampsAtBot < 4) {
-        maxWindow += 189;
-      } else {
-        obj_0->O0_Y0[outBufIdx] = obj_0->W1_Sums;
-        outBufIdx++;
-        obj_0->W1_Sums = 0.0F;
-        nSampsAtBot = 0;
-        cffIdx = 0;
-        offsetFromMemBase--;
-        if (offsetFromMemBase < 0) {
-          offsetFromMemBase += 189;
-        }
+      nSampsAtBot = 0;
+    }
 
-        maxWindow = 0;
+    obj->cSFunObject.W1_Sums += rtb_Buffer1[3] * obj->
+      cSFunObject.P1_FILT[offsetFromMemBase];
+    offsetFromMemBase++;
+    for (jIdx = i + 1; jIdx < nSampsAtBot + 155; jIdx++) {
+      obj_0->W1_Sums += obj_0->W3_StatesBuff[jIdx] * obj_0->
+        P1_FILT[offsetFromMemBase];
+      offsetFromMemBase++;
+    }
+
+    for (jIdx = nSampsAtBot; jIdx <= i; jIdx++) {
+      obj_0->W1_Sums += obj_0->W3_StatesBuff[jIdx] * obj_0->
+        P1_FILT[offsetFromMemBase];
+      offsetFromMemBase++;
+    }
+
+    obj->cSFunObject.W3_StatesBuff[i] = rtb_Buffer1[3];
+    i += 155;
+    if (i >= 620) {
+      i -= 620;
+    }
+
+    nSamps++;
+    if (nSamps >= 4) {
+      obj->cSFunObject.O0_Y0 = obj->cSFunObject.W1_Sums;
+      obj->cSFunObject.W1_Sums = 0.0F;
+      nSamps = 0;
+      offsetFromMemBase = 0;
+      i--;
+      if (i < 0) {
+        i += 155;
       }
     }
 
-    obj->cSFunObject.W4_TapDelayIndex = offsetFromMemBase;
-    obj->cSFunObject.W2_CoeffIdx = cffIdx;
-    obj->cSFunObject.W0_PhaseIdx = nSampsAtBot;
+    obj->cSFunObject.W4_TapDelayIndex = i;
+    obj->cSFunObject.W2_CoeffIdx = offsetFromMemBase;
+    obj->cSFunObject.W0_PhaseIdx = nSamps;
+    rtb_SineWave2 = obj->cSFunObject.O0_Y0;
 
-    /* Unbuffer: '<S1>/Unbuffer2' incorporates:
+    /* Buffer: '<S1>/Buffer3' incorporates:
      *  MATLABSystem: '<S1>/CIC Compensation Decimator1'
      */
-    TpLockInAmp_DW.Unbuffer2_CircBuff[0] = obj->cSFunObject.O0_Y0[0];
-    TpLockInAmp_DW.Unbuffer2_CircBuff[1] = obj->cSFunObject.O0_Y0[1];
-    TpLockInAmp_DW.Unbuffer2_memIdx = 0;
+    nSamps = 480;
+    offsetFromMemBase = TpLockInAmp_DW.Buffer3_inBufPtrIdx;
+    if (480 - TpLockInAmp_DW.Buffer3_inBufPtrIdx <= 1) {
+      for (i = 0; i < 480 - TpLockInAmp_DW.Buffer3_inBufPtrIdx; i++) {
+        TpLockInAmp_DW.Buffer3_CircBuf[TpLockInAmp_DW.Buffer3_inBufPtrIdx + i] =
+          rtb_SineWave2;
+      }
+
+      offsetFromMemBase = 0;
+      nSamps = TpLockInAmp_DW.Buffer3_inBufPtrIdx;
+    }
+
+    for (i = 0; i < nSamps - 479; i++) {
+      TpLockInAmp_DW.Buffer3_CircBuf[offsetFromMemBase + i] = rtb_SineWave2;
+    }
+
+    TpLockInAmp_DW.Buffer3_inBufPtrIdx++;
+    if (TpLockInAmp_DW.Buffer3_inBufPtrIdx >= 480) {
+      TpLockInAmp_DW.Buffer3_inBufPtrIdx -= 480;
+    }
+
+    TpLockInAmp_DW.Buffer3_bufferLength++;
+    if (TpLockInAmp_DW.Buffer3_bufferLength > 480) {
+      TpLockInAmp_DW.Buffer3_outBufPtrIdx = (TpLockInAmp_DW.Buffer3_outBufPtrIdx
+        + TpLockInAmp_DW.Buffer3_bufferLength) - 480;
+      if (TpLockInAmp_DW.Buffer3_outBufPtrIdx > 480) {
+        TpLockInAmp_DW.Buffer3_outBufPtrIdx -= 480;
+      }
+
+      TpLockInAmp_DW.Buffer3_bufferLength = 480;
+    }
   }
 
   /* End of Buffer: '<S1>/Buffer1' */
 
-  /* Unbuffer: '<S1>/Unbuffer2' */
-  if (TpLockInAmp_M->Timing.TaskCounters.TID[1] == 0) {
-    rtb_SineWave2 =
-      TpLockInAmp_DW.Unbuffer2_CircBuff[TpLockInAmp_DW.Unbuffer2_memIdx];
-    if (TpLockInAmp_DW.Unbuffer2_memIdx < 1) {
-      TpLockInAmp_DW.Unbuffer2_memIdx++;
+  /* Buffer: '<S1>/Buffer3' */
+  if (TpLockInAmp_M->Timing.TaskCounters.TID[2] == 0) {
+    TpLockInAmp_DW.Buffer3_bufferLength -= 60;
+    if (TpLockInAmp_DW.Buffer3_bufferLength < 180) {
+      TpLockInAmp_DW.Buffer3_outBufPtrIdx = (TpLockInAmp_DW.Buffer3_outBufPtrIdx
+        + TpLockInAmp_DW.Buffer3_bufferLength) - 180;
+      if (TpLockInAmp_DW.Buffer3_outBufPtrIdx < 0) {
+        TpLockInAmp_DW.Buffer3_outBufPtrIdx += 480;
+      }
+
+      TpLockInAmp_DW.Buffer3_bufferLength = 180;
     }
 
+    offsetFromMemBase = 0;
+    jIdx = TpLockInAmp_DW.Buffer3_outBufPtrIdx - 180;
+    if (TpLockInAmp_DW.Buffer3_outBufPtrIdx - 180 < 0) {
+      jIdx = TpLockInAmp_DW.Buffer3_outBufPtrIdx + 300;
+    }
+
+    nSampsAtBot = 480 - jIdx;
+    nSamps = 240;
+    if (480 - jIdx <= 240) {
+      for (i = 0; i < 480 - jIdx; i++) {
+        rtb_Buffer3[i] = TpLockInAmp_DW.Buffer3_CircBuf[jIdx + i];
+      }
+
+      offsetFromMemBase = 480 - jIdx;
+      jIdx = 0;
+      nSamps = 240 - nSampsAtBot;
+    }
+
+    for (i = 0; i < nSamps; i++) {
+      rtb_Buffer3[offsetFromMemBase + i] = TpLockInAmp_DW.Buffer3_CircBuf[jIdx +
+        i];
+    }
+
+    TpLockInAmp_DW.Buffer3_outBufPtrIdx = jIdx + nSamps;
+
+    /* MATLAB Function: '<S1>/MATLAB Function2' incorporates:
+     *  Buffer: '<S1>/Buffer3'
+     */
+    TpLockInAmp_MATLABFunction1(rtb_Buffer3, &rtb_SineWave2);
+
     /* MATLAB Function: '<S1>/MATLAB Function' incorporates:
-     *  Product: '<S1>/Product2'
      *  Product: '<S1>/Product3'
      *  Sum: '<S1>/Add1'
      */
-    signal_amp = sqrtf(rtb_Unbuffer1 * rtb_Unbuffer1 + rtb_SineWave2 *
-                       rtb_SineWave2) * 2.0F;
-
-    /* Trigonometry: '<S1>/Trigonometric Function' incorporates:
-     *  Product: '<S1>/Divide'
-     */
-    signal_pha = atanf(rtb_Unbuffer1 / rtb_SineWave2);
+    signal_amp = sqrtf(rtb_SineWave2 * rtb_SineWave2 + rtb_y_n) * 2.0F;
   }
 
   rate_scheduler();
@@ -453,198 +799,163 @@ void TpLockInAmp_step(void)
 void TpLockInAmp_initialize(void)
 {
   {
-    static const real32_T tmp[760] = { 7.842983E-6F, 9.89838E-6F, 1.22808187E-5F,
-      1.50236265E-5F, 1.8160019E-5F, 2.17250181E-5F, 2.57548454E-5F,
-      3.02876288E-5F, 3.53638898E-5F, 4.10247849E-5F, 4.73165819E-5F,
-      5.42784874E-5F, 6.19532075E-5F, 7.03835E-5F, 7.96129316E-5F,
-      8.96898709E-5F, 0.000100665391F, 0.000112584785F, 0.000125491759F,
-      0.000139425625F, 0.000154432069F, 0.000170564934F, 0.000187872123F,
-      0.0002063828F, 0.00022612825F, 0.000247168151F, 0.000269550452F,
-      0.000293258257F, 0.000318397069F, 0.000344880886F, 0.000372928596F,
-      0.000402399688F, 0.000433366746F, 0.00046584729F, 0.000499855727F,
-      0.000535401574F, 0.000572489749F, 0.000611119962F, 0.000651289243F,
-      0.000692989735F, 0.000736214046F, 0.000780938542F, 0.000827140932F,
-      0.000874792866F, 0.000923860876F, 0.000974308467F, 0.00102608697F,
-      0.0010791471F, 0.0011334361F, 0.0011888945F, 0.0012454493F, 0.00130303425F,
-      0.00136157649F, 0.00142098905F, 0.00148118485F, 0.00154208217F,
-      0.00160356786F, 0.00166556472F, 0.00172794051F, 0.00179060397F,
-      0.00185346277F, 0.00191636744F, 0.00197921414F, 0.00204188307F,
-      0.00210425025F, 0.00216619181F, 0.00222758157F, 0.00228829309F,
-      0.00234819716F, 0.00240716361F, 0.00246507069F, 0.00252178661F,
-      0.00257718703F, 0.00263114204F, 0.00268353056F, 0.00273423432F,
-      0.00278313132F, 0.00283010793F, 0.00287505309F, 0.00291785854F,
-      0.00295841927F, 0.00299663935F, 0.00303242449F, 0.00306568481F,
-      0.00309634185F, 0.00312431343F, 0.00314953853F, 0.00317194359F,
-      0.00319147715F, 0.00320809032F, 0.00322174886F, 0.00323240412F,
-      0.00324003468F, 0.00324462052F, 0.00324615068F, 0.00324462052F,
-      0.00324003468F, 0.00323240412F, 0.00322174886F, 0.00320809032F,
-      0.00319147715F, 0.00317194359F, 0.00314953853F, 0.00312431343F,
-      0.00309634185F, 0.00306568481F, 0.00303242449F, 0.00299663935F,
-      0.00295841927F, 0.00291785854F, 0.00287505309F, 0.00283010793F,
-      0.00278313132F, 0.00273423432F, 0.00268353056F, 0.00263114204F,
-      0.00257718703F, 0.00252178661F, 0.00246507069F, 0.00240716361F,
-      0.00234819716F, 0.00228829309F, 0.00222758157F, 0.00216619181F,
-      0.00210425025F, 0.00204188307F, 0.00197921414F, 0.00191636744F,
-      0.00185346277F, 0.00179060397F, 0.00172794051F, 0.00166556472F,
-      0.00160356786F, 0.00154208217F, 0.00148118485F, 0.00142098905F,
-      0.00136157649F, 0.00130303425F, 0.0012454493F, 0.0011888945F,
-      0.0011334361F, 0.0010791471F, 0.00102608697F, 0.000974308467F,
-      0.000923860876F, 0.000874792866F, 0.000827140932F, 0.000780938542F,
-      0.000736214046F, 0.000692989735F, 0.000651289243F, 0.000611119962F,
-      0.000572489749F, 0.000535401574F, 0.000499855727F, 0.00046584729F,
-      0.000433366746F, 0.000402399688F, 0.000372928596F, 0.000344880886F,
-      0.000318397069F, 0.000293258257F, 0.000269550452F, 0.000247168151F,
-      0.00022612825F, 0.0002063828F, 0.000187872123F, 0.000170564934F,
-      0.000154432069F, 0.000139425625F, 0.000125491759F, 0.000112584785F,
-      0.000100665391F, 8.96898709E-5F, 7.96129316E-5F, 7.03835E-5F,
-      6.19532075E-5F, 5.42784874E-5F, 4.73165819E-5F, 4.10247849E-5F,
-      3.53638898E-5F, 3.02876288E-5F, 2.57548454E-5F, 2.17250181E-5F,
-      1.8160019E-5F, 1.50236265E-5F, 1.22808187E-5F, 9.89838E-6F, 7.842983E-6F,
-      0.0F, 7.37548316E-6F, 9.35404569E-6F, 1.16516E-5F, 1.43012085E-5F,
-      1.7336024E-5F, 2.07903504E-5F, 2.47006064E-5F, 2.91038068E-5F,
-      3.40404549E-5F, 3.95525749E-5F, 4.56811176E-5F, 5.2471205E-5F,
-      5.99645391E-5F, 6.82018726E-5F, 7.7226774E-5F, 8.70873264E-5F,
-      9.78334429E-5F, 0.000109512344F, 0.000122169338F, 0.000135841983F,
-      0.000150576801F, 0.000166422134F, 0.000183432247F, 0.000201639836F,
-      0.000221072274F, 0.000241781832F, 0.000263828406F, 0.000287204341F,
-      0.000311967655F, 0.000338144193F, 0.000365791057F, 0.000394891336F,
-      0.000425482547F, 0.000457583286F, 0.000491208513F, 0.000526369375F,
-      0.00056307175F, 0.000601316744F, 0.000641101564F, 0.000682422891F,
-      0.000725264836F, 0.000769616745F, 0.000815452775F, 0.00086274452F,
-      0.00091146148F, 0.000961568847F, 0.00101301854F, 0.00106576364F,
-      0.00111975055F, 0.00117492303F, 0.001231211F, 0.00128854427F,
-      0.00134685449F, 0.00140605844F, 0.0014660653F, 0.00152679684F,
-      0.00158814481F, 0.00165002258F, 0.00171231211F, 0.00177492818F,
-      0.00183774065F, 0.0019006409F, 0.0019635132F, 0.00202623801F,
-      0.00208869227F, 0.00215075188F, 0.00221229158F, 0.00227318448F,
-      0.00233330275F, 0.00239252F, 0.00245069969F, 0.00250772596F,
-      0.00256346702F, 0.00261779339F, 0.00267058611F, 0.00272172131F,
-      0.00277108164F, 0.00281854859F, 0.00286401249F, 0.00290736253F,
-      0.0029484944F, 0.00298730773F, 0.00302371057F, 0.00305760955F,
-      0.00308892527F, 0.00311757415F, 0.00314349332F, 0.00316660665F,
-      0.00318686664F, 0.00320421858F, 0.00321861473F, 0.0032300218F,
-      0.00323841069F, 0.00324375904F, 0.00324605359F, 0.00324528851F,
-      0.00324146589F, 0.00323459483F, 0.0032246937F, 0.00321179163F,
-      0.00319590722F, 0.00317709963F, 0.003155404F, 0.00313087902F,
-      0.00310358778F, 0.00307359523F, 0.00304097799F, 0.0030058166F,
-      0.00296819629F, 0.00292821229F, 0.00288595865F, 0.00284153805F,
-      0.00279505854F, 0.00274663162F, 0.00269636745F, 0.00264438987F,
-      0.00259081391F, 0.00253576413F, 0.00247936719F, 0.00242174743F,
-      0.00236303126F, 0.00230334862F, 0.00224282686F, 0.00218159473F,
-      0.00211977912F, 0.0020575067F, 0.00199490157F, 0.00193208805F,
-      0.00186918664F, 0.00180632656F, 0.00174359139F, 0.0016811263F,
-      0.00161902129F, 0.00155740115F, 0.00149634609F, 0.00143596623F,
-      0.00137635064F, 0.00131758209F, 0.00125975092F, 0.00120293221F,
-      0.00114719348F, 0.00109260518F, 0.00103923306F, 0.000987128587F,
-      0.00093634415F, 0.000886927F, 0.00083891768F, 0.000792351144F,
-      0.000747255574F, 0.000703654776F, 0.000661570637F, 0.000621016952F,
-      0.000582001696F, 0.000544527662F, 0.000508596597F, 0.000474204397F,
-      0.000441343203F, 0.000409999309F, 0.000380156096F, 0.000351843046F,
-      0.000324911147F, 0.000299399078F, 0.000275352213F, 0.000252636557F,
-      0.000231262791F, 0.000211200502F, 0.000192384992F, 0.000174779168F,
-      0.000158356925F, 0.000143074052F, 0.000128876811F, 0.000115716823F,
-      0.000103553728F, 9.23462794E-5F, 8.20496571E-5F, 7.26127473E-5F,
-      6.39872305E-5F, 5.61282759E-5F, 4.89920785E-5F, 4.25374128E-5F,
-      3.67217726E-5F, 3.15031139E-5F, 2.68381391E-5F, 2.2686334E-5F,
-      1.90084156E-5F, 1.57683371E-5F, 1.29303262E-5F, 1.04609862E-5F,
-      8.32681599E-6F, 5.33248167E-5F, 6.92832054E-6F, 8.83179837E-6F,
-      1.10467363E-5F, 1.36051867E-5F, 1.65405363E-5F, 1.98865546E-5F,
-      2.36795386E-5F, 2.79557498E-5F, 3.27552734E-5F, 3.81182872E-5F,
-      4.40903641E-5F, 5.07109071E-5F, 5.80248634E-5F, 6.60715596E-5F,
-      7.4895157E-5F, 8.45424147E-5F, 9.50621E-5F, 0.000106503845F,
-      0.000118912925F, 0.000132327637F, 0.000146791179F, 0.000162354612F,
-      0.000179069626F, 0.000196975656F, 0.000216098284F, 0.000236481865F,
-      0.000258191692F, 0.000281238055F, 0.000305635971F, 0.000331498595F,
-      0.000358734367F, 0.000387478445F, 0.000417695119F, 0.000449416984F,
-      0.000482659729F, 0.00051743607F, 0.000553752703F, 0.000591612305F,
-      0.000631012372F, 0.000671948772F, 0.000714414287F, 0.000758391F,
-      0.000803857809F, 0.000850787503F, 0.000899151666F, 0.000948915433F,
-      0.00100003381F, 0.00105246052F, 0.0011061416F, 0.00116102386F,
-      0.00121703884F, 0.00127411773F, 0.00133219082F, 0.00139118009F,
-      0.0014509937F, 0.00151155237F, 0.00157275738F, 0.00163450849F,
-      0.00169670989F, 0.00175926043F, 0.00182202144F, 0.00188491505F,
-      0.00194780563F, 0.00201057852F, 0.00207311194F, 0.00213528192F,
-      0.00219696364F, 0.00225803F, 0.00231835409F, 0.00237780577F,
-      0.00243626139F, 0.00249358756F, 0.00254966016F, 0.00260435161F,
-      0.00265754038F, 0.0027091F, 0.00275891623F, 0.00280686654F, 0.00285284198F,
-      0.00289673F, 0.00293842587F, 0.0029778278F, 0.00301484251F, 0.00304937502F,
-      0.0030813443F, 0.00311066699F, 0.00313727465F, 0.00316109508F,
-      0.00318207615F, 0.00320015894F, 0.0032152934F, 0.00322745321F,
-      0.00323659903F, 0.00324270898F, 0.0032457679F, 0.0032457679F,
-      0.00324270898F, 0.00323659903F, 0.00322745321F, 0.0032152934F,
-      0.00320015894F, 0.00318207615F, 0.00316109508F, 0.00313727465F,
-      0.00311066699F, 0.0030813443F, 0.00304937502F, 0.00301484251F,
-      0.0029778278F, 0.00293842587F, 0.00289673F, 0.00285284198F, 0.00280686654F,
-      0.00275891623F, 0.0027091F, 0.00265754038F, 0.00260435161F, 0.00254966016F,
-      0.00249358756F, 0.00243626139F, 0.00237780577F, 0.00231835409F,
-      0.00225803F, 0.00219696364F, 0.00213528192F, 0.00207311194F,
-      0.00201057852F, 0.00194780563F, 0.00188491505F, 0.00182202144F,
-      0.00175926043F, 0.00169670989F, 0.00163450849F, 0.00157275738F,
-      0.00151155237F, 0.0014509937F, 0.00139118009F, 0.00133219082F,
-      0.00127411773F, 0.00121703884F, 0.00116102386F, 0.0011061416F,
-      0.00105246052F, 0.00100003381F, 0.000948915433F, 0.000899151666F,
-      0.000850787503F, 0.000803857809F, 0.000758391F, 0.000714414287F,
-      0.000671948772F, 0.000631012372F, 0.000591612305F, 0.000553752703F,
-      0.00051743607F, 0.000482659729F, 0.000449416984F, 0.000417695119F,
-      0.000387478445F, 0.000358734367F, 0.000331498595F, 0.000305635971F,
-      0.000281238055F, 0.000258191692F, 0.000236481865F, 0.000216098284F,
-      0.000196975656F, 0.000179069626F, 0.000162354612F, 0.000146791179F,
-      0.000132327637F, 0.000118912925F, 0.000106503845F, 9.50621E-5F,
-      8.45424147E-5F, 7.4895157E-5F, 6.60715596E-5F, 5.80248634E-5F,
-      5.07109071E-5F, 4.40903641E-5F, 3.81182872E-5F, 3.27552734E-5F,
-      2.79557498E-5F, 2.36795386E-5F, 1.98865546E-5F, 1.65405363E-5F,
-      1.36051867E-5F, 1.10467363E-5F, 8.83179837E-6F, 6.92832054E-6F,
-      5.33248167E-5F, 8.32681599E-6F, 1.04609862E-5F, 1.29303262E-5F,
-      1.57683371E-5F, 1.90084156E-5F, 2.2686334E-5F, 2.68381391E-5F,
-      3.15031139E-5F, 3.67217726E-5F, 4.25374128E-5F, 4.89920785E-5F,
-      5.61282759E-5F, 6.39872305E-5F, 7.26127473E-5F, 8.20496571E-5F,
-      9.23462794E-5F, 0.000103553728F, 0.000115716823F, 0.000128876811F,
-      0.000143074052F, 0.000158356925F, 0.000174779168F, 0.000192384992F,
-      0.000211200502F, 0.000231262791F, 0.000252636557F, 0.000275352213F,
-      0.000299399078F, 0.000324911147F, 0.000351843046F, 0.000380156096F,
-      0.000409999309F, 0.000441343203F, 0.000474204397F, 0.000508596597F,
-      0.000544527662F, 0.000582001696F, 0.000621016952F, 0.000661570637F,
-      0.000703654776F, 0.000747255574F, 0.000792351144F, 0.00083891768F,
-      0.000886927F, 0.00093634415F, 0.000987128587F, 0.00103923306F,
-      0.00109260518F, 0.00114719348F, 0.00120293221F, 0.00125975092F,
-      0.00131758209F, 0.00137635064F, 0.00143596623F, 0.00149634609F,
-      0.00155740115F, 0.00161902129F, 0.0016811263F, 0.00174359139F,
-      0.00180632656F, 0.00186918664F, 0.00193208805F, 0.00199490157F,
-      0.0020575067F, 0.00211977912F, 0.00218159473F, 0.00224282686F,
-      0.00230334862F, 0.00236303126F, 0.00242174743F, 0.00247936719F,
-      0.00253576413F, 0.00259081391F, 0.00264438987F, 0.00269636745F,
-      0.00274663162F, 0.00279505854F, 0.00284153805F, 0.00288595865F,
-      0.00292821229F, 0.00296819629F, 0.0030058166F, 0.00304097799F,
-      0.00307359523F, 0.00310358778F, 0.00313087902F, 0.003155404F,
-      0.00317709963F, 0.00319590722F, 0.00321179163F, 0.0032246937F,
-      0.00323459483F, 0.00324146589F, 0.00324528851F, 0.00324605359F,
-      0.00324375904F, 0.00323841069F, 0.0032300218F, 0.00321861473F,
-      0.00320421858F, 0.00318686664F, 0.00316660665F, 0.00314349332F,
-      0.00311757415F, 0.00308892527F, 0.00305760955F, 0.00302371057F,
-      0.00298730773F, 0.0029484944F, 0.00290736253F, 0.00286401249F,
-      0.00281854859F, 0.00277108164F, 0.00272172131F, 0.00267058611F,
-      0.00261779339F, 0.00256346702F, 0.00250772596F, 0.00245069969F,
-      0.00239252F, 0.00233330275F, 0.00227318448F, 0.00221229158F,
-      0.00215075188F, 0.00208869227F, 0.00202623801F, 0.0019635132F,
-      0.0019006409F, 0.00183774065F, 0.00177492818F, 0.00171231211F,
-      0.00165002258F, 0.00158814481F, 0.00152679684F, 0.0014660653F,
-      0.00140605844F, 0.00134685449F, 0.00128854427F, 0.001231211F,
-      0.00117492303F, 0.00111975055F, 0.00106576364F, 0.00101301854F,
-      0.000961568847F, 0.00091146148F, 0.00086274452F, 0.000815452775F,
-      0.000769616745F, 0.000725264836F, 0.000682422891F, 0.000641101564F,
-      0.000601316744F, 0.00056307175F, 0.000526369375F, 0.000491208513F,
-      0.000457583286F, 0.000425482547F, 0.000394891336F, 0.000365791057F,
-      0.000338144193F, 0.000311967655F, 0.000287204341F, 0.000263828406F,
-      0.000241781832F, 0.000221072274F, 0.000201639836F, 0.000183432247F,
-      0.000166422134F, 0.000150576801F, 0.000135841983F, 0.000122169338F,
-      0.000109512344F, 9.78334429E-5F, 8.70873264E-5F, 7.7226774E-5F,
-      6.82018726E-5F, 5.99645391E-5F, 5.2471205E-5F, 4.56811176E-5F,
-      3.95525749E-5F, 3.40404549E-5F, 2.91038068E-5F, 2.47006064E-5F,
-      2.07903504E-5F, 1.7336024E-5F, 1.43012085E-5F, 1.16516E-5F, 9.35404569E-6F,
-      7.37548316E-6F };
+    static const real32_T tmp[624] = { 2.69757862E-7F, 4.60730064E-7F,
+      7.34964E-7F, 1.11698807E-6F, 1.63626009E-6F, 2.32778E-6F, 3.23267227E-6F,
+      4.39875612E-6F, 5.88121338E-6F, 7.7431323E-6F, 1.00561065E-5F,
+      1.29008449E-5F, 1.63675104E-5F, 2.05561573E-5F, 2.55771465E-5F,
+      3.15513462E-5F, 3.86102802E-5F, 4.68962135E-5F, 5.6561712E-5F,
+      6.77696153E-5F, 8.06926473E-5F, 9.55126961E-5F, 0.000112420035F,
+      0.000131612207F, 0.000153293033F, 0.00017767126F, 0.000204958938F,
+      0.000235369356F, 0.000269115641F, 0.000306408503F, 0.000347453722F,
+      0.00039244967F, 0.000441585405F, 0.000495037646F, 0.000552967598F,
+      0.000615519239F, 0.000682815793F, 0.000754956855F, 0.000832017045F,
+      0.000914041186F, 0.00100104464F, 0.00109300786F, 0.00118987716F,
+      0.00129156199F, 0.0013979316F, 0.00150881649F, 0.00162400596F,
+      0.00174324785F, 0.00186624879F, 0.00199267361F, 0.00212214724F,
+      0.00225425465F, 0.00238854322F, 0.00252452469F, 0.00266167754F,
+      0.00279944926F, 0.00293726078F, 0.00307450932F, 0.00321057322F,
+      0.00334481546F, 0.00347658829F, 0.00360523909F, 0.00373011455F,
+      0.00385056646F, 0.00396595616F, 0.00407566037F, 0.00417907722F,
+      0.00427563F, 0.0043647741F, 0.00444599846F, 0.00451883394F, 0.00458285538F,
+      0.00463768654F, 0.00468300236F, 0.00471853279F, 0.00474406499F,
+      0.00475944625F, 0.00476458389F, 0.00475944625F, 0.00474406499F,
+      0.00471853279F, 0.00468300236F, 0.00463768654F, 0.00458285538F,
+      0.00451883394F, 0.00444599846F, 0.0043647741F, 0.00427563F, 0.00417907722F,
+      0.00407566037F, 0.00396595616F, 0.00385056646F, 0.00373011455F,
+      0.00360523909F, 0.00347658829F, 0.00334481546F, 0.00321057322F,
+      0.00307450932F, 0.00293726078F, 0.00279944926F, 0.00266167754F,
+      0.00252452469F, 0.00238854322F, 0.00225425465F, 0.00212214724F,
+      0.00199267361F, 0.00186624879F, 0.00174324785F, 0.00162400596F,
+      0.00150881649F, 0.0013979316F, 0.00129156199F, 0.00118987716F,
+      0.00109300786F, 0.00100104464F, 0.000914041186F, 0.000832017045F,
+      0.000754956855F, 0.000682815793F, 0.000615519239F, 0.000552967598F,
+      0.000495037646F, 0.000441585405F, 0.00039244967F, 0.000347453722F,
+      0.000306408503F, 0.000269115641F, 0.000235369356F, 0.000204958938F,
+      0.00017767126F, 0.000153293033F, 0.000131612207F, 0.000112420035F,
+      9.55126961E-5F, 8.06926473E-5F, 6.77696153E-5F, 5.6561712E-5F,
+      4.68962135E-5F, 3.86102802E-5F, 3.15513462E-5F, 2.55771465E-5F,
+      2.05561573E-5F, 1.63675104E-5F, 1.29008449E-5F, 1.00561065E-5F,
+      7.7431323E-6F, 5.88121338E-6F, 4.39875612E-6F, 3.23267227E-6F, 2.32778E-6F,
+      1.63626009E-6F, 1.11698807E-6F, 7.34964E-7F, 4.60730064E-7F,
+      2.69757862E-7F, 0.0F, 2.32551812E-7F, 4.06029244E-7F, 6.57319902E-7F,
+      1.0098446E-6F, 1.49174366E-6F, 2.13660314E-6F, 2.98393115E-6F,
+      4.07985135E-6F, 5.47762875E-6F, 7.23829817E-6F, 9.43130817E-6F,
+      1.21350322E-5F, 1.54372265E-5F, 1.94354325E-5F, 2.42374117E-5F,
+      2.99614076E-5F, 3.67362627E-5F, 4.47015336E-5F, 5.40072615E-5F,
+      6.48137429E-5F, 7.72912754E-5F, 9.16195568E-5F, 0.000107986816F,
+      0.0001265889F, 0.000147628147F, 0.000171312262F, 0.000197852612F,
+      0.00022746234F, 0.000260354776F, 0.000296741433F, 0.000336829602F,
+      0.000380819751F, 0.00042890344F, 0.000481260824F, 0.000538057182F,
+      0.000599440886F, 0.000665540923F, 0.000736462884F, 0.000812287792F,
+      0.000893068442F, 0.000978827477F, 0.00106955413F, 0.00116520422F,
+      0.0012656959F, 0.00137090858F, 0.00148068275F, 0.00159481808F,
+      0.00171307276F, 0.0018351638F, 0.00196076627F, 0.0020895151F,
+      0.00222100504F, 0.00235479278F, 0.00249039871F, 0.00262730918F,
+      0.00276497938F, 0.00290283654F, 0.00304028369F, 0.00317670312F,
+      0.00331146084F, 0.00344391214F, 0.00357340486F, 0.00369928521F,
+      0.00382090337F, 0.00393761741F, 0.00404880056F, 0.00415384443F,
+      0.00425216602F, 0.00434321119F, 0.00442646118F, 0.00450143544F,
+      0.00456769764F, 0.00462485896F, 0.00467258086F, 0.00471058F,
+      0.00473862886F, 0.00475655869F, 0.00476426259F, 0.00476169307F,
+      0.00474886689F, 0.00472586F, 0.00469281152F, 0.00464991899F, 0.0045974385F,
+      0.0045356811F, 0.00446501095F, 0.00438584154F, 0.00429863157F,
+      0.00420388114F, 0.00410212716F, 0.00399393914F, 0.0038799129F,
+      0.00376066752F, 0.00363683747F, 0.00350906933F, 0.00337801548F,
+      0.00324432971F, 0.00310866116F, 0.00297164964F, 0.00283392146F,
+      0.00269608456F, 0.00255872426F, 0.00242239982F, 0.0022876407F,
+      0.00215494423F, 0.00202477188F, 0.00189754798F, 0.00177365809F,
+      0.00165344728F, 0.00153721939F, 0.00142523705F, 0.00131772109F,
+      0.00121485209F, 0.00111676846F, 0.00102357194F, 0.000935325341F,
+      0.000852056604F, 0.000773758395F, 0.000700393517F, 0.000631894218F,
+      0.000568167F, 0.000509094447F, 0.000454537192F, 0.000404338352F,
+      0.000358324731F, 0.000316310092F, 0.000278098218F, 0.000243484901F,
+      0.000212260406F, 0.000184212127F, 0.000159126444F, 0.000136791F,
+      0.000116995994F, 9.95362352E-5F, 8.42125E-5F, 7.08326115E-5F,
+      5.92124888E-5F, 4.91770588E-5F, 4.05609717E-5F, 3.3208984E-5F,
+      2.69763514E-5F, 2.17288052E-5F, 1.73428271E-5F, 1.37054503E-5F,
+      1.07140777E-5F, 8.27608619E-6F, 6.30845943E-6F, 4.73737919E-6F,
+      3.4976681E-6F, 2.53223357E-6F, 1.79148481E-6F, 1.23265045E-6F,
+      8.19290335E-7F, 5.20585218E-7F, 3.10858837E-7F, 5.87492707E-7F,
+      1.99018103E-7F, 3.56197546E-7F, 5.86010117E-7F, 9.10786071E-7F,
+      1.3574105E-6F, 1.95807729E-6F, 2.75072398E-6F, 3.77979791E-6F,
+      5.09669417E-6F, 6.76045738E-6F, 8.83842131E-6F, 1.14066088E-5F,
+      1.45504146E-5F, 1.83649154E-5F, 2.29552788E-5F, 2.84371054E-5F,
+      3.49365873E-5F, 4.25905819E-5F, 5.15465799E-5F, 6.19622951E-5F,
+      7.40055693E-5F, 8.78538413E-5F, 0.000103693274F, 0.000121717909F,
+      0.000142128585F, 0.000165131773F, 0.000190938066F, 0.000219760492F,
+      0.000251812307F, 0.000287305767F, 0.000326449459F, 0.00036944577F,
+      0.000416488707F, 0.000467761507F, 0.000523433497F, 0.000583657471F,
+      0.000648567569F, 0.000718275493F, 0.000792868494F, 0.000872407F,
+      0.000956920849F, 0.00104640867F, 0.00114083441F, 0.00124012481F,
+      0.00134417077F, 0.00145282189F, 0.00156588794F, 0.00168313773F,
+      0.00180429849F, 0.00192905578F, 0.00205705431F, 0.00218789908F,
+      0.00232115597F, 0.00245635421F, 0.00259298855F, 0.00273052161F,
+      0.00286838715F, 0.00300599379F, 0.00314272894F, 0.00327796233F,
+      0.00341105112F, 0.00354134478F, 0.00366818951F, 0.00379093364F,
+      0.00390893314F, 0.00402155705F, 0.00412819162F, 0.00422824686F,
+      0.00432116119F, 0.00440640654F, 0.00448349258F, 0.00455197133F,
+      0.0046114414F, 0.00466155214F, 0.00470200507F, 0.00473255944F,
+      0.00475303177F, 0.00476329867F, 0.00476329867F, 0.00475303177F,
+      0.00473255944F, 0.00470200507F, 0.00466155214F, 0.0046114414F,
+      0.00455197133F, 0.00448349258F, 0.00440640654F, 0.00432116119F,
+      0.00422824686F, 0.00412819162F, 0.00402155705F, 0.00390893314F,
+      0.00379093364F, 0.00366818951F, 0.00354134478F, 0.00341105112F,
+      0.00327796233F, 0.00314272894F, 0.00300599379F, 0.00286838715F,
+      0.00273052161F, 0.00259298855F, 0.00245635421F, 0.00232115597F,
+      0.00218789908F, 0.00205705431F, 0.00192905578F, 0.00180429849F,
+      0.00168313773F, 0.00156588794F, 0.00145282189F, 0.00134417077F,
+      0.00124012481F, 0.00114083441F, 0.00104640867F, 0.000956920849F,
+      0.000872407F, 0.000792868494F, 0.000718275493F, 0.000648567569F,
+      0.000583657471F, 0.000523433497F, 0.000467761507F, 0.000416488707F,
+      0.00036944577F, 0.000326449459F, 0.000287305767F, 0.000251812307F,
+      0.000219760492F, 0.000190938066F, 0.000165131773F, 0.000142128585F,
+      0.000121717909F, 0.000103693274F, 8.78538413E-5F, 7.40055693E-5F,
+      6.19622951E-5F, 5.15465799E-5F, 4.25905819E-5F, 3.49365873E-5F,
+      2.84371054E-5F, 2.29552788E-5F, 1.83649154E-5F, 1.45504146E-5F,
+      1.14066088E-5F, 8.83842131E-6F, 6.76045738E-6F, 5.09669417E-6F,
+      3.77979791E-6F, 2.75072398E-6F, 1.95807729E-6F, 1.3574105E-6F,
+      9.10786071E-7F, 5.86010117E-7F, 3.56197546E-7F, 1.99018103E-7F,
+      5.87492707E-7F, 3.10858837E-7F, 5.20585218E-7F, 8.19290335E-7F,
+      1.23265045E-6F, 1.79148481E-6F, 2.53223357E-6F, 3.4976681E-6F,
+      4.73737919E-6F, 6.30845943E-6F, 8.27608619E-6F, 1.07140777E-5F,
+      1.37054503E-5F, 1.73428271E-5F, 2.17288052E-5F, 2.69763514E-5F,
+      3.3208984E-5F, 4.05609717E-5F, 4.91770588E-5F, 5.92124888E-5F,
+      7.08326115E-5F, 8.42125E-5F, 9.95362352E-5F, 0.000116995994F, 0.000136791F,
+      0.000159126444F, 0.000184212127F, 0.000212260406F, 0.000243484901F,
+      0.000278098218F, 0.000316310092F, 0.000358324731F, 0.000404338352F,
+      0.000454537192F, 0.000509094447F, 0.000568167F, 0.000631894218F,
+      0.000700393517F, 0.000773758395F, 0.000852056604F, 0.000935325341F,
+      0.00102357194F, 0.00111676846F, 0.00121485209F, 0.00131772109F,
+      0.00142523705F, 0.00153721939F, 0.00165344728F, 0.00177365809F,
+      0.00189754798F, 0.00202477188F, 0.00215494423F, 0.0022876407F,
+      0.00242239982F, 0.00255872426F, 0.00269608456F, 0.00283392146F,
+      0.00297164964F, 0.00310866116F, 0.00324432971F, 0.00337801548F,
+      0.00350906933F, 0.00363683747F, 0.00376066752F, 0.0038799129F,
+      0.00399393914F, 0.00410212716F, 0.00420388114F, 0.00429863157F,
+      0.00438584154F, 0.00446501095F, 0.0045356811F, 0.0045974385F,
+      0.00464991899F, 0.00469281152F, 0.00472586F, 0.00474886689F,
+      0.00476169307F, 0.00476426259F, 0.00475655869F, 0.00473862886F,
+      0.00471058F, 0.00467258086F, 0.00462485896F, 0.00456769764F,
+      0.00450143544F, 0.00442646118F, 0.00434321119F, 0.00425216602F,
+      0.00415384443F, 0.00404880056F, 0.00393761741F, 0.00382090337F,
+      0.00369928521F, 0.00357340486F, 0.00344391214F, 0.00331146084F,
+      0.00317670312F, 0.00304028369F, 0.00290283654F, 0.00276497938F,
+      0.00262730918F, 0.00249039871F, 0.00235479278F, 0.00222100504F,
+      0.0020895151F, 0.00196076627F, 0.0018351638F, 0.00171307276F,
+      0.00159481808F, 0.00148068275F, 0.00137090858F, 0.0012656959F,
+      0.00116520422F, 0.00106955413F, 0.000978827477F, 0.000893068442F,
+      0.000812287792F, 0.000736462884F, 0.000665540923F, 0.000599440886F,
+      0.000538057182F, 0.000481260824F, 0.00042890344F, 0.000380819751F,
+      0.000336829602F, 0.000296741433F, 0.000260354776F, 0.00022746234F,
+      0.000197852612F, 0.000171312262F, 0.000147628147F, 0.0001265889F,
+      0.000107986816F, 9.16195568E-5F, 7.72912754E-5F, 6.48137429E-5F,
+      5.40072615E-5F, 4.47015336E-5F, 3.67362627E-5F, 2.99614076E-5F,
+      2.42374117E-5F, 1.94354325E-5F, 1.54372265E-5F, 1.21350322E-5F,
+      9.43130817E-6F, 7.23829817E-6F, 5.47762875E-6F, 4.07985135E-6F,
+      2.98393115E-6F, 2.13660314E-6F, 1.49174366E-6F, 1.0098446E-6F,
+      6.57319902E-7F, 4.06029244E-7F, 2.32551812E-7F };
 
     b_dspcodegen_FIRDecimator_TpL_T *iobj_0;
-    dsp_CICCompensationDecimato_f_T *obj_0;
     dsp_CICCompensationDecimator__T *obj;
     int32_T i;
     boolean_T wasTunablePropsChanged;
@@ -664,8 +975,13 @@ void TpLockInAmp_initialize(void)
     /* Trigonometric mode: compute accumulated
        normalized trig fcn argument for each channel */
     /* Keep normalized value in range [0 2*pi) */
-    TpLockInAmp_DW.Buffer_inBufPtrIdx = 8;
-    TpLockInAmp_DW.Buffer_bufferLength = 8;
+    TpLockInAmp_DW.Buffer_inBufPtrIdx = 4;
+    TpLockInAmp_DW.Buffer_bufferLength = 4;
+
+    /* InitializeConditions for Buffer: '<S1>/Buffer2' */
+    TpLockInAmp_DW.Buffer2_inBufPtrIdx = 240;
+    TpLockInAmp_DW.Buffer2_bufferLength = 240;
+    TpLockInAmp_DW.Buffer2_outBufPtrIdx = 180;
 
     /* InitializeConditions for S-Function (sdspsine2): '<S1>/Sine Wave2' */
     /* This code only executes when block is re-enabled in an
@@ -678,23 +994,76 @@ void TpLockInAmp_initialize(void)
     TpLockInAmp_DW.SineWave2_AccFreqNorm = 1.57079637F;
 
     /* InitializeConditions for Buffer: '<S1>/Buffer1' */
-    TpLockInAmp_DW.Buffer1_inBufPtrIdx = 8;
-    TpLockInAmp_DW.Buffer1_bufferLength = 8;
+    TpLockInAmp_DW.Buffer1_inBufPtrIdx = 4;
+    TpLockInAmp_DW.Buffer1_bufferLength = 4;
+
+    /* InitializeConditions for Buffer: '<S1>/Buffer3' */
+    TpLockInAmp_DW.Buffer3_inBufPtrIdx = 240;
+    TpLockInAmp_DW.Buffer3_bufferLength = 240;
+    TpLockInAmp_DW.Buffer3_outBufPtrIdx = 180;
 
     /* Start for MATLABSystem: '<S1>/CIC Compensation Decimator' */
+    TpLockInAmp_DW.obj_b._pobj0.matlabCodegenIsDeleted = true;
+    TpLockInAmp_DW.obj_b.matlabCodegenIsDeleted = true;
+    TpLockInAmp_DW.obj_b.isInitialized = 0;
+    TpLockInAmp_DW.obj_b.TunablePropsChanged = false;
+    TpLockInAmp_DW.obj_b.matlabCodegenIsDeleted = false;
+    obj = &TpLockInAmp_DW.obj_b;
+    TpLockInAmp_DW.obj_b.isSetupComplete = false;
+    TpLockInAmp_DW.obj_b.isInitialized = 1;
+    wasTunablePropsChanged = TpLockInAmp_DW.obj_b.TunablePropsChanged;
+    TpLockInAmp_DW.obj_b.TunablePropsChanged = wasTunablePropsChanged;
+    iobj_0 = &TpLockInAmp_DW.obj_b._pobj0;
+    obj->_pobj0.isInitialized = 0;
+
+    /* System object Constructor function: dsp.FIRDecimator */
+    iobj_0->cSFunObject.P0_IC = 0.0F;
+    for (i = 0; i < 624; i++) {
+      iobj_0->cSFunObject.P1_FILT[i] = tmp[i];
+    }
+
+    obj->_pobj0.matlabCodegenIsDeleted = false;
+    TpLockInAmp_DW.obj_b.pFIRDecimator = &obj->_pobj0;
+    iobj_0 = TpLockInAmp_DW.obj_b.pFIRDecimator;
+    iobj_0->isSetupComplete = false;
+    iobj_0->isInitialized = 1;
+    iobj_0->isSetupComplete = true;
+    TpLockInAmp_DW.obj_b.isSetupComplete = true;
+
+    /* End of Start for MATLABSystem: '<S1>/CIC Compensation Decimator' */
+
+    /* InitializeConditions for MATLABSystem: '<S1>/CIC Compensation Decimator' */
+    iobj_0 = TpLockInAmp_DW.obj_b.pFIRDecimator;
+    if (iobj_0->isInitialized == 1) {
+      /* System object Initialization function: dsp.FIRDecimator */
+      iobj_0->cSFunObject.W2_CoeffIdx = 468;
+      iobj_0->cSFunObject.W0_PhaseIdx = 3;
+      iobj_0->cSFunObject.W4_TapDelayIndex = 465;
+      iobj_0->cSFunObject.W1_Sums = 0.0F;
+      for (i = 0; i < 620; i++) {
+        iobj_0->cSFunObject.W3_StatesBuff[i] = 0.0F;
+      }
+    }
+
+    /* End of InitializeConditions for MATLABSystem: '<S1>/CIC Compensation Decimator' */
+
+    /* Start for MATLABSystem: '<S1>/CIC Compensation Decimator1' */
     TpLockInAmp_DW.obj._pobj0.matlabCodegenIsDeleted = true;
     TpLockInAmp_DW.obj.matlabCodegenIsDeleted = true;
     TpLockInAmp_DW.obj.isInitialized = 0;
+    TpLockInAmp_DW.obj.TunablePropsChanged = false;
     TpLockInAmp_DW.obj.matlabCodegenIsDeleted = false;
     obj = &TpLockInAmp_DW.obj;
     TpLockInAmp_DW.obj.isSetupComplete = false;
     TpLockInAmp_DW.obj.isInitialized = 1;
+    wasTunablePropsChanged = TpLockInAmp_DW.obj.TunablePropsChanged;
+    TpLockInAmp_DW.obj.TunablePropsChanged = wasTunablePropsChanged;
     iobj_0 = &TpLockInAmp_DW.obj._pobj0;
     obj->_pobj0.isInitialized = 0;
 
     /* System object Constructor function: dsp.FIRDecimator */
     iobj_0->cSFunObject.P0_IC = 0.0F;
-    for (i = 0; i < 760; i++) {
+    for (i = 0; i < 624; i++) {
       iobj_0->cSFunObject.P1_FILT[i] = tmp[i];
     }
 
@@ -706,62 +1075,17 @@ void TpLockInAmp_initialize(void)
     iobj_0->isSetupComplete = true;
     TpLockInAmp_DW.obj.isSetupComplete = true;
 
-    /* End of Start for MATLABSystem: '<S1>/CIC Compensation Decimator' */
-
-    /* InitializeConditions for MATLABSystem: '<S1>/CIC Compensation Decimator' */
-    iobj_0 = TpLockInAmp_DW.obj.pFIRDecimator;
-    if (iobj_0->isInitialized == 1) {
-      /* System object Initialization function: dsp.FIRDecimator */
-      iobj_0->cSFunObject.W2_CoeffIdx = 570;
-      iobj_0->cSFunObject.W0_PhaseIdx = 3;
-      iobj_0->cSFunObject.W4_TapDelayIndex = 567;
-      iobj_0->cSFunObject.W1_Sums = 0.0F;
-      for (i = 0; i < 756; i++) {
-        iobj_0->cSFunObject.W3_StatesBuff[i] = 0.0F;
-      }
-    }
-
-    /* End of InitializeConditions for MATLABSystem: '<S1>/CIC Compensation Decimator' */
-
-    /* Start for MATLABSystem: '<S1>/CIC Compensation Decimator1' */
-    TpLockInAmp_DW.obj_l._pobj0.matlabCodegenIsDeleted = true;
-    TpLockInAmp_DW.obj_l.matlabCodegenIsDeleted = true;
-    TpLockInAmp_DW.obj_l.isInitialized = 0;
-    TpLockInAmp_DW.obj_l.TunablePropsChanged = false;
-    TpLockInAmp_DW.obj_l.matlabCodegenIsDeleted = false;
-    obj_0 = &TpLockInAmp_DW.obj_l;
-    TpLockInAmp_DW.obj_l.isSetupComplete = false;
-    TpLockInAmp_DW.obj_l.isInitialized = 1;
-    wasTunablePropsChanged = TpLockInAmp_DW.obj_l.TunablePropsChanged;
-    TpLockInAmp_DW.obj_l.TunablePropsChanged = wasTunablePropsChanged;
-    iobj_0 = &TpLockInAmp_DW.obj_l._pobj0;
-    obj_0->_pobj0.isInitialized = 0;
-
-    /* System object Constructor function: dsp.FIRDecimator */
-    iobj_0->cSFunObject.P0_IC = 0.0F;
-    for (i = 0; i < 760; i++) {
-      iobj_0->cSFunObject.P1_FILT[i] = tmp[i];
-    }
-
-    obj_0->_pobj0.matlabCodegenIsDeleted = false;
-    TpLockInAmp_DW.obj_l.pFIRDecimator = &obj_0->_pobj0;
-    iobj_0 = TpLockInAmp_DW.obj_l.pFIRDecimator;
-    iobj_0->isSetupComplete = false;
-    iobj_0->isInitialized = 1;
-    iobj_0->isSetupComplete = true;
-    TpLockInAmp_DW.obj_l.isSetupComplete = true;
-
     /* End of Start for MATLABSystem: '<S1>/CIC Compensation Decimator1' */
 
     /* InitializeConditions for MATLABSystem: '<S1>/CIC Compensation Decimator1' */
-    iobj_0 = TpLockInAmp_DW.obj_l.pFIRDecimator;
+    iobj_0 = TpLockInAmp_DW.obj.pFIRDecimator;
     if (iobj_0->isInitialized == 1) {
       /* System object Initialization function: dsp.FIRDecimator */
-      iobj_0->cSFunObject.W2_CoeffIdx = 570;
+      iobj_0->cSFunObject.W2_CoeffIdx = 468;
       iobj_0->cSFunObject.W0_PhaseIdx = 3;
-      iobj_0->cSFunObject.W4_TapDelayIndex = 567;
+      iobj_0->cSFunObject.W4_TapDelayIndex = 465;
       iobj_0->cSFunObject.W1_Sums = 0.0F;
-      for (i = 0; i < 756; i++) {
+      for (i = 0; i < 620; i++) {
         iobj_0->cSFunObject.W3_StatesBuff[i] = 0.0F;
       }
     }
@@ -776,6 +1100,28 @@ void TpLockInAmp_terminate(void)
   b_dspcodegen_FIRDecimator_TpL_T *obj;
 
   /* Terminate for MATLABSystem: '<S1>/CIC Compensation Decimator' */
+  if (!TpLockInAmp_DW.obj_b.matlabCodegenIsDeleted) {
+    TpLockInAmp_DW.obj_b.matlabCodegenIsDeleted = true;
+    if ((TpLockInAmp_DW.obj_b.isInitialized == 1) &&
+        TpLockInAmp_DW.obj_b.isSetupComplete) {
+      obj = TpLockInAmp_DW.obj_b.pFIRDecimator;
+      if (obj->isInitialized == 1) {
+        obj->isInitialized = 2;
+      }
+    }
+  }
+
+  obj = &TpLockInAmp_DW.obj_b._pobj0;
+  if (!obj->matlabCodegenIsDeleted) {
+    obj->matlabCodegenIsDeleted = true;
+    if (obj->isInitialized == 1) {
+      obj->isInitialized = 2;
+    }
+  }
+
+  /* End of Terminate for MATLABSystem: '<S1>/CIC Compensation Decimator' */
+
+  /* Terminate for MATLABSystem: '<S1>/CIC Compensation Decimator1' */
   if (!TpLockInAmp_DW.obj.matlabCodegenIsDeleted) {
     TpLockInAmp_DW.obj.matlabCodegenIsDeleted = true;
     if ((TpLockInAmp_DW.obj.isInitialized == 1) &&
@@ -788,28 +1134,6 @@ void TpLockInAmp_terminate(void)
   }
 
   obj = &TpLockInAmp_DW.obj._pobj0;
-  if (!obj->matlabCodegenIsDeleted) {
-    obj->matlabCodegenIsDeleted = true;
-    if (obj->isInitialized == 1) {
-      obj->isInitialized = 2;
-    }
-  }
-
-  /* End of Terminate for MATLABSystem: '<S1>/CIC Compensation Decimator' */
-
-  /* Terminate for MATLABSystem: '<S1>/CIC Compensation Decimator1' */
-  if (!TpLockInAmp_DW.obj_l.matlabCodegenIsDeleted) {
-    TpLockInAmp_DW.obj_l.matlabCodegenIsDeleted = true;
-    if ((TpLockInAmp_DW.obj_l.isInitialized == 1) &&
-        TpLockInAmp_DW.obj_l.isSetupComplete) {
-      obj = TpLockInAmp_DW.obj_l.pFIRDecimator;
-      if (obj->isInitialized == 1) {
-        obj->isInitialized = 2;
-      }
-    }
-  }
-
-  obj = &TpLockInAmp_DW.obj_l._pobj0;
   if (!obj->matlabCodegenIsDeleted) {
     obj->matlabCodegenIsDeleted = true;
     if (obj->isInitialized == 1) {
