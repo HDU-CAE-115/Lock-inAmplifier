@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'TpLockInAmp'.
  *
- * Model version                  : 1.10
+ * Model version                  : 1.14
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Mon Feb 21 19:45:56 2022
+ * C/C++ source code generated on : Wed Feb 23 16:29:10 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM 7
@@ -20,73 +20,130 @@
 #include "rtwtypes.h"
 
 /* Model Code Variants */
-#ifndef struct_tag_72MydC7zUhyq0YzFvTOBKD
-#define struct_tag_72MydC7zUhyq0YzFvTOBKD
+#ifndef struct_tag_XdlEALNcG6IydpD9a28YoH
+#define struct_tag_XdlEALNcG6IydpD9a28YoH
 
-struct tag_72MydC7zUhyq0YzFvTOBKD
+struct tag_XdlEALNcG6IydpD9a28YoH
 {
   int32_T S0_isInitialized;
-  int32_T W0_PhaseIdx;
-  real32_T W1_Sums;
-  int32_T W2_CoeffIdx;
-  real32_T W3_StatesBuff[620];
-  int32_T W4_TapDelayIndex;
-  int32_T W5_PrevNumChan;
-  real32_T P0_IC;
-  real32_T P1_FILT[624];
-  real32_T O0_Y0;
+  real32_T W0_states[569];
+  real32_T P0_InitialStates;
+  real32_T P1_Coefficients[570];
 };
 
-#endif                                 /*struct_tag_72MydC7zUhyq0YzFvTOBKD*/
+#endif                                 /*struct_tag_XdlEALNcG6IydpD9a28YoH*/
 
-#ifndef typedef_b_dsp_FIRDecimator_0_TpLockIn_T
-#define typedef_b_dsp_FIRDecimator_0_TpLockIn_T
+#ifndef typedef_b_dsp_FIRFilter_0_TpLockInAmp_T
+#define typedef_b_dsp_FIRFilter_0_TpLockInAmp_T
 
-typedef struct tag_72MydC7zUhyq0YzFvTOBKD b_dsp_FIRDecimator_0_TpLockIn_T;
+typedef struct tag_XdlEALNcG6IydpD9a28YoH b_dsp_FIRFilter_0_TpLockInAmp_T;
 
-#endif                               /*typedef_b_dsp_FIRDecimator_0_TpLockIn_T*/
+#endif                               /*typedef_b_dsp_FIRFilter_0_TpLockInAmp_T*/
 
-#ifndef struct_tag_IsYFv9fviifZeDiBwwUnfC
-#define struct_tag_IsYFv9fviifZeDiBwwUnfC
+#ifndef struct_tag_xfVGiaTXVbMGxZAE1jG9OE
+#define struct_tag_xfVGiaTXVbMGxZAE1jG9OE
 
-struct tag_IsYFv9fviifZeDiBwwUnfC
+struct tag_xfVGiaTXVbMGxZAE1jG9OE
 {
   boolean_T matlabCodegenIsDeleted;
   int32_T isInitialized;
   boolean_T isSetupComplete;
-  b_dsp_FIRDecimator_0_TpLockIn_T cSFunObject;
+  b_dsp_FIRFilter_0_TpLockInAmp_T cSFunObject;
 };
 
-#endif                                 /*struct_tag_IsYFv9fviifZeDiBwwUnfC*/
+#endif                                 /*struct_tag_xfVGiaTXVbMGxZAE1jG9OE*/
 
-#ifndef typedef_b_dspcodegen_FIRDecimator_TpL_T
-#define typedef_b_dspcodegen_FIRDecimator_TpL_T
+#ifndef typedef_b_dspcodegen_FIRFilter_TpLock_T
+#define typedef_b_dspcodegen_FIRFilter_TpLock_T
 
-typedef struct tag_IsYFv9fviifZeDiBwwUnfC b_dspcodegen_FIRDecimator_TpL_T;
+typedef struct tag_xfVGiaTXVbMGxZAE1jG9OE b_dspcodegen_FIRFilter_TpLock_T;
 
-#endif                               /*typedef_b_dspcodegen_FIRDecimator_TpL_T*/
+#endif                               /*typedef_b_dspcodegen_FIRFilter_TpLock_T*/
 
-#ifndef struct_tag_Ih36V9BVGVdv8KLOKKO2DB
-#define struct_tag_Ih36V9BVGVdv8KLOKKO2DB
+#ifndef struct_tag_Zcgq8NYRZcfTEKau6Tqp2C
+#define struct_tag_Zcgq8NYRZcfTEKau6Tqp2C
 
-struct tag_Ih36V9BVGVdv8KLOKKO2DB
+struct tag_Zcgq8NYRZcfTEKau6Tqp2C
 {
   boolean_T matlabCodegenIsDeleted;
   int32_T isInitialized;
   boolean_T isSetupComplete;
   boolean_T TunablePropsChanged;
-  b_dspcodegen_FIRDecimator_TpL_T *pFIRDecimator;
-  b_dspcodegen_FIRDecimator_TpL_T _pobj0;
+  int32_T NumChannels;
+  b_dspcodegen_FIRFilter_TpLock_T *FilterObj;
+  b_dspcodegen_FIRFilter_TpLock_T _pobj0;
 };
 
-#endif                                 /*struct_tag_Ih36V9BVGVdv8KLOKKO2DB*/
+#endif                                 /*struct_tag_Zcgq8NYRZcfTEKau6Tqp2C*/
 
-#ifndef typedef_dsp_CICCompensationDecimator__T
-#define typedef_dsp_CICCompensationDecimator__T
+#ifndef typedef_dsp_LowpassFilter_TpLockInAmp_T
+#define typedef_dsp_LowpassFilter_TpLockInAmp_T
 
-typedef struct tag_Ih36V9BVGVdv8KLOKKO2DB dsp_CICCompensationDecimator__T;
+typedef struct tag_Zcgq8NYRZcfTEKau6Tqp2C dsp_LowpassFilter_TpLockInAmp_T;
 
-#endif                               /*typedef_dsp_CICCompensationDecimator__T*/
+#endif                               /*typedef_dsp_LowpassFilter_TpLockInAmp_T*/
+
+#ifndef struct_tag_TwJGHvXPradEDghFizrOxE
+#define struct_tag_TwJGHvXPradEDghFizrOxE
+
+struct tag_TwJGHvXPradEDghFizrOxE
+{
+  int32_T isInitialized;
+  boolean_T isSetupComplete;
+  real32_T pCumSum;
+  real32_T pCumSumRev[179];
+  real32_T pCumRevIndex;
+};
+
+#endif                                 /*struct_tag_TwJGHvXPradEDghFizrOxE*/
+
+#ifndef typedef_g_dsp_private_SlidingWindowAv_T
+#define typedef_g_dsp_private_SlidingWindowAv_T
+
+typedef struct tag_TwJGHvXPradEDghFizrOxE g_dsp_private_SlidingWindowAv_T;
+
+#endif                               /*typedef_g_dsp_private_SlidingWindowAv_T*/
+
+#ifndef struct_tag_PMfBDzoakfdM9QAdfx2o6D
+#define struct_tag_PMfBDzoakfdM9QAdfx2o6D
+
+struct tag_PMfBDzoakfdM9QAdfx2o6D
+{
+  uint32_T f1[8];
+};
+
+#endif                                 /*struct_tag_PMfBDzoakfdM9QAdfx2o6D*/
+
+#ifndef typedef_cell_wrap_TpLockInAmp_T
+#define typedef_cell_wrap_TpLockInAmp_T
+
+typedef struct tag_PMfBDzoakfdM9QAdfx2o6D cell_wrap_TpLockInAmp_T;
+
+#endif                                 /*typedef_cell_wrap_TpLockInAmp_T*/
+
+#ifndef struct_tag_8edqVRHMd2pyRQ4RFw1NMH
+#define struct_tag_8edqVRHMd2pyRQ4RFw1NMH
+
+struct tag_8edqVRHMd2pyRQ4RFw1NMH
+{
+  boolean_T matlabCodegenIsDeleted;
+  int32_T isInitialized;
+  boolean_T isSetupComplete;
+  boolean_T TunablePropsChanged;
+  cell_wrap_TpLockInAmp_T inputVarSize;
+  g_dsp_private_SlidingWindowAv_T *pStatistic;
+  int32_T NumChannels;
+  g_dsp_private_SlidingWindowAv_T _pobj0;
+};
+
+#endif                                 /*struct_tag_8edqVRHMd2pyRQ4RFw1NMH*/
+
+#ifndef typedef_dsp_simulink_MovingAverage_Tp_T
+#define typedef_dsp_simulink_MovingAverage_Tp_T
+
+typedef struct tag_8edqVRHMd2pyRQ4RFw1NMH dsp_simulink_MovingAverage_Tp_T;
+
+#endif                               /*typedef_dsp_simulink_MovingAverage_Tp_T*/
 
 /* Forward declaration for rtModel */
 typedef struct tag_RTM_TpLockInAmp_T RT_MODEL_TpLockInAmp_T;

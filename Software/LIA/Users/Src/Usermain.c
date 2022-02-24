@@ -1,5 +1,5 @@
 #include "Usermain.h"
-#define Temporary //Immediate|Temporary
+#define Immediate //Immediate|Temporary
 
 int cnt = 0;
 float result = 0;
@@ -16,7 +16,7 @@ void Usermain(){
 	//Ð´ÅäÖÃ¼Ä´æÆ÷
 	AD7190_WR_ConfigReg(0x00,0x10,0x08);//Í¨µÀ1¡¢1±¶ÔöÒæ
 	//Ð´Ä£Ê½¼Ä´æÆ÷7
-	AD7190_WR_ModeReg(0x0C,0x00,0x05);//960HZ
+	AD7190_WR_ModeReg(0x0C,0x00,0x14);// 240HZ¡¢960HZ(0x05)
 
 //	buf[0] = 0x28;
 //	HAL_SPI_Transmit(&hspi1,buf,1,1000);//control the progress to write mode register 
@@ -70,7 +70,8 @@ void Usermain(){
 		TpLockInAmp_step();
 		signal_output = signal_amp;
 		//HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, (signal_output/3.3)*4096);
-		printf("%lf\n",signal_output);
+		//printf("%lf %lf %lf %lf %lf %lf\n",signal_input,TpLockInAmp_B.LowpassFilter.LowpassFilter,TpLockInAmp_B.MovingAverage2.MovingAverage1,TpLockInAmp_B.LowpassFilter1.LowpassFilter,TpLockInAmp_B.MovingAverage1.MovingAverage1,signal_output);
+		//printf("%lf\n",signal_output);
 	}
 
 #endif

@@ -1,0 +1,77 @@
+T2FE8 000:204.124   SEGGER J-Link V7.22b Log File
+T2FE8 000:204.548   DLL Compiled: Jun 17 2021 17:22:49
+T2FE8 000:204.557   Logging started @ 2022-02-24 09:51
+T2FE8 000:204.563 - 204.584ms
+T2FE8 000:204.607 JLINK_SetWarnOutHandler(...)
+T2FE8 000:204.617 - 0.013ms
+T2FE8 000:204.626 JLINK_OpenEx(...)
+T2FE8 000:208.668   Firmware: J-Link ARM V8 compiled Nov 28 2014 13:44:46
+T2FE8 000:209.328   Firmware: J-Link ARM V8 compiled Nov 28 2014 13:44:46
+T2FE8 000:212.879   Hardware: V8.00
+T2FE8 000:212.900   S/N: 788594195
+T2FE8 000:212.918   OEM: SEGGER
+T2FE8 000:212.927   Feature(s): RDI,FlashDL,FlashBP,JFlash,GDB
+T2FE8 000:214.385   TELNET listener socket opened on port 19021
+T2FE8 000:214.508   WEBSRV Starting webserver
+T2FE8 000:214.690   WEBSRV Webserver running on local port 19080
+T2FE8 000:214.702 - 10.079ms returns "O.K."
+T2FE8 000:214.723 JLINK_GetEmuCaps()
+T2FE8 000:214.735 - 0.016ms returns 0xB9FF7BBF
+T2FE8 000:214.752 JLINK_TIF_GetAvailable(...)
+T2FE8 000:214.998 - 0.252ms
+T2FE8 000:215.013 JLINK_SetErrorOutHandler(...)
+T2FE8 000:215.019 - 0.009ms
+T2FE8 000:215.047 JLINK_ExecCommand("ProjectFile = "F:\Desktop\Lock-inAmplifier\Software\LIA\MDK-ARM\JLinkSettings.ini"", ...). 
+T2FE8 000:229.602 - 14.566ms returns 0x00
+T2FE8 000:229.629 JLINK_ExecCommand("Device = STM32G431RBTx", ...). 
+T2FE8 000:229.924   Looking for J-Link GUI Server exe at: D:\Software\Keil_v5\ARM\Segger\JLinkGUIServer.exe
+T2FE8 000:230.028   Looking for J-Link GUI Server exe at: \JLinkGUIServer.exe
+T2FE8 000:532.287   Failed to connect to J-Link GUI Server.
+T2FE8 022:349.956 - 0.494ms returns 0xFFFFFFFF
+T2FE8 022:350.016 JLINK_GetHardwareVersion()
+T2FE8 022:350.022 - 0.022ms returns 80000
+T2FE8 022:350.043 JLINK_GetDLLVersion()
+T2FE8 022:350.049 - 0.008ms returns 72202
+T2FE8 022:350.056 JLINK_GetOEMString(...)
+T2FE8 022:350.064 JLINK_GetFirmwareString(...)
+T2FE8 022:350.076 - 0.014ms
+T2FE8 022:350.085 JLINK_GetDLLVersion()
+T2FE8 022:350.090 - 0.008ms returns 72202
+T2FE8 022:350.097 JLINK_GetCompileDateTime()
+T2FE8 022:350.102 - 0.008ms
+T2FE8 022:350.112 JLINK_GetFirmwareString(...)
+T2FE8 022:350.117 - 0.008ms
+T2FE8 022:350.125 JLINK_GetHardwareVersion()
+T2FE8 022:350.130 - 0.008ms returns 80000
+T2FE8 022:350.138 JLINK_GetSN()
+T2FE8 022:350.144 - 0.008ms returns 788594195
+T2FE8 022:350.152 JLINK_GetOEMString(...)
+T2FE8 022:350.171 JLINK_TIF_Select(JLINKARM_TIF_JTAG)
+T2FE8 022:351.689 - 1.532ms returns 0x00
+T2FE8 022:351.711 JLINK_HasError()
+T2FE8 022:351.741 JLINK_SetSpeed(5000)
+T2FE8 022:351.920 - 0.187ms
+T2FE8 022:352.531 JLINK_HasError()
+T2FE8 022:352.587 JLINK_SetResetType(JLINKARM_RESET_TYPE_NORMAL)
+T2FE8 022:352.594 - 0.010ms returns JLINKARM_RESET_TYPE_NORMAL
+T2FE8 022:352.604 JLINK_Reset()
+T2FE8 022:352.919   
+  ***** Error: 
+T2FE8 022:352.933   No CPU core or target device has been selected. Please make sure at least the core J-Link shall connect to, is selected.
+T2FE8 022:352.941 - 0.340ms
+T2FE8 022:352.973 JLINK_GetIdData(pIdData)
+T2FE8 022:353.230   
+  ***** Error: 
+T2FE8 022:353.244   No CPU core or target device has been selected. Please make sure at least the core J-Link shall connect to, is selected.
+T2FE8 022:353.252 - 0.282ms
+T2FE8 022:353.264 JLINK_GetIdData(pIdData)
+T2FE8 022:353.562   
+  ***** Error: 
+T2FE8 022:353.586   No CPU core or target device has been selected. Please make sure at least the core J-Link shall connect to, is selected.
+T2FE8 022:353.613 - 0.351ms
+T2FE8 022:360.582 JLINK_GetFirmwareString(...)
+T2FE8 022:360.601 - 0.022ms
+T2FE8 022:969.507 JLINK_Close()
+T2FE8 022:993.004 - 23.516ms
+T2FE8 022:993.028   
+T2FE8 022:993.036   Closed

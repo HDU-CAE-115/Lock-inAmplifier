@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'TpLockInAmp'.
  *
- * Model version                  : 1.10
+ * Model version                  : 1.14
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Mon Feb 21 19:45:56 2022
+ * C/C++ source code generated on : Wed Feb 23 16:29:10 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM 7
@@ -50,7 +50,7 @@ void rt_OneStep(void)
   /* Re-enable timer or interrupt here */
   /* Set model inputs here */
 
-  /* Step the model for base rate */
+  /* Step the model */
   TpLockInAmp_step();
 
   /* Get model outputs here */
@@ -79,7 +79,7 @@ int_T main(int_T argc, const char *argv[])
   TpLockInAmp_initialize();
 
   /* Attach rt_OneStep to a timer or interrupt service routine with
-   * period 0.0010416666666666667 seconds (the model's base sample time) here.  The
+   * period 0.0041666666666666666 seconds (the model's base sample time) here.  The
    * call syntax for rt_OneStep is
    *
    *  rt_OneStep();

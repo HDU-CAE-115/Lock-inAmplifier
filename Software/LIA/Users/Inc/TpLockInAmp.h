@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'TpLockInAmp'.
  *
- * Model version                  : 1.10
+ * Model version                  : 1.14
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Mon Feb 21 19:45:56 2022
+ * C/C++ source code generated on : Wed Feb 23 16:29:10 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM 7
@@ -34,39 +34,54 @@
 #define rtmSetErrorStatus(rtm, val)    ((rtm)->errorStatus = (val))
 #endif
 
+/* Block signals for system '<S1>/Lowpass Filter' */
+typedef struct {
+  real32_T LowpassFilter;              /* '<S1>/Lowpass Filter' */
+} B_LowpassFilter_TpLockInAmp_T;
+
+/* Block states (default storage) for system '<S1>/Lowpass Filter' */
+typedef struct {
+  dsp_LowpassFilter_TpLockInAmp_T obj; /* '<S1>/Lowpass Filter' */
+  boolean_T objisempty;                /* '<S1>/Lowpass Filter' */
+  boolean_T isInitialized;             /* '<S1>/Lowpass Filter' */
+} DW_LowpassFilter_TpLockInAmp_T;
+
+/* Block signals for system '<S1>/Moving Average1' */
+typedef struct {
+  real32_T MovingAverage1;             /* '<S1>/Moving Average1' */
+} B_MovingAverage1_TpLockInAmp_T;
+
+/* Block states (default storage) for system '<S1>/Moving Average1' */
+typedef struct {
+  dsp_simulink_MovingAverage_Tp_T obj; /* '<S1>/Moving Average1' */
+  boolean_T objisempty;                /* '<S1>/Moving Average1' */
+} DW_MovingAverage1_TpLockInAmp_T;
+
+/* Block signals (default storage) */
+typedef struct {
+  B_MovingAverage1_TpLockInAmp_T MovingAverage2;/* '<S1>/Moving Average1' */
+  B_MovingAverage1_TpLockInAmp_T MovingAverage1;/* '<S1>/Moving Average1' */
+  B_LowpassFilter_TpLockInAmp_T LowpassFilter1;/* '<S1>/Lowpass Filter' */
+  B_LowpassFilter_TpLockInAmp_T LowpassFilter;/* '<S1>/Lowpass Filter' */
+} B_TpLockInAmp_T;
+
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
-  dsp_CICCompensationDecimator__T obj; /* '<S1>/CIC Compensation Decimator1' */
-  dsp_CICCompensationDecimator__T obj_b;/* '<S1>/CIC Compensation Decimator' */
   real32_T SineWave1_AccFreqNorm;      /* '<S1>/Sine Wave1' */
-  real32_T Buffer_CircBuf[8];          /* '<S1>/Buffer' */
   real32_T SineWave2_AccFreqNorm;      /* '<S1>/Sine Wave2' */
-  real32_T Buffer1_CircBuf[8];         /* '<S1>/Buffer1' */
-  int32_T Buffer_inBufPtrIdx;          /* '<S1>/Buffer' */
-  int32_T Buffer_outBufPtrIdx;         /* '<S1>/Buffer' */
-  int32_T Buffer_bufferLength;         /* '<S1>/Buffer' */
-  int32_T Buffer1_inBufPtrIdx;         /* '<S1>/Buffer1' */
-  int32_T Buffer1_outBufPtrIdx;        /* '<S1>/Buffer1' */
-  int32_T Buffer1_bufferLength;        /* '<S1>/Buffer1' */
-  boolean_T isInitialized;             /* '<S1>/CIC Compensation Decimator1' */
-  boolean_T isInitialized_g;           /* '<S1>/CIC Compensation Decimator' */
+  DW_MovingAverage1_TpLockInAmp_T MovingAverage2;/* '<S1>/Moving Average1' */
+  DW_MovingAverage1_TpLockInAmp_T MovingAverage1;/* '<S1>/Moving Average1' */
+  DW_LowpassFilter_TpLockInAmp_T LowpassFilter1;/* '<S1>/Lowpass Filter' */
+  DW_LowpassFilter_TpLockInAmp_T LowpassFilter;/* '<S1>/Lowpass Filter' */
 } DW_TpLockInAmp_T;
 
 /* Real-time Model Data Structure */
 struct tag_RTM_TpLockInAmp_T {
   const char_T * volatile errorStatus;
-
-  /*
-   * Timing:
-   * The following substructure contains information regarding
-   * the timing information for the model.
-   */
-  struct {
-    struct {
-      uint8_T TID[2];
-    } TaskCounters;
-  } Timing;
 };
+
+/* Block signals (default storage) */
+extern B_TpLockInAmp_T TpLockInAmp_B;
 
 /* Block states (default storage) */
 extern DW_TpLockInAmp_T TpLockInAmp_DW;
