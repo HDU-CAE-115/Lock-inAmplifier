@@ -1023,44 +1023,14 @@
               <FilePath>..\Users\Src\Usermain.c</FilePath>
             </File>
             <File>
-              <FileName>Usermain.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Users\Inc\Usermain.h</FilePath>
-            </File>
-            <File>
               <FileName>AD719X.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Users\Src\AD719X.c</FilePath>
             </File>
             <File>
-              <FileName>AD719X.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Users\Inc\AD719X.h</FilePath>
-            </File>
-            <File>
               <FileName>TpLockInAmp.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Users\Src\TpLockInAmp.c</FilePath>
-            </File>
-            <File>
-              <FileName>rtwtypes.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Users\Inc\rtwtypes.h</FilePath>
-            </File>
-            <File>
-              <FileName>TpLockInAmp.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Users\Inc\TpLockInAmp.h</FilePath>
-            </File>
-            <File>
-              <FileName>TpLockInAmp_types.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Users\Inc\TpLockInAmp_types.h</FilePath>
-            </File>
-            <File>
-              <FileName>TpLockInAmp_private.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Users\Inc\TpLockInAmp_private.h</FilePath>
             </File>
           </Files>
         </Group>
