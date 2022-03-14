@@ -5,11 +5,12 @@ int cnt = 0;
 int op_cnt = 1;
 float signal_output = 0;
 float adc_result[MAXDATASIZE] = {0};
+float Stage1_V = 0;
 char SIGOP[45] = {0};
 
 void Usermain(){
 	OLED_Init();
-	//初始化、开启DAC
+	//初始化、开启DAC和ADC
 	HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 2048);
 	HAL_DAC_Start(&hdac1, DAC_CHANNEL_1);
 	//AD7190初始化
@@ -67,16 +68,19 @@ void Usermain(){
 	
 	TpLockInAmp_initialize();
 	while(1){
-		//OLED_ShowString(0, 1, "----------------", 12);
+		HAL_ADC_Start(&hadc1);
+		HAL_ADC_PollForConversion(&hadc1, 100);//100ms
+		Stage1_V = (float) HAL_ADC_GetValue(&hadc1) / 4096 * 3.3;
+		printf("$%f ;",Stage1_V);
 		signal_input = AD7190_ReadDataOnce();
 		TpLockInAmp_step();
 		signal_output = signal_amp;
-		if( ( op_cnt++ ) % 10 == 0 ){
+		if( ( op_cnt++ ) % 100 == 0 ){
 			//OLED_Clear();
-			//sprintf(SIGOP, "%f", signal_amp);
-			//OLED_ShowString(5, 3, SIGOP, 16);
+			sprintf(SIGOP, "%f", signal_amp);
+			OLED_ShowString(5, 3, SIGOP, 16);
 		}
-		//HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, (signal_output/3.3)*4096);
+		HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, ((signal_bpf+1.5)/3.3)*4095);
 		//printf("%f\n",signal_output);
 	}
 

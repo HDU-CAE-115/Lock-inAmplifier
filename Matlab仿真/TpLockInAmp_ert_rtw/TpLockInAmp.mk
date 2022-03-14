@@ -2,7 +2,7 @@
 ## Makefile generated for component 'TpLockInAmp'. 
 ## 
 ## Makefile     : TpLockInAmp.mk
-## Generated on : Wed Feb 23 09:54:06 2022
+## Generated on : Tue Mar 01 20:54:46 2022
 ## Final product: $(RELATIVE_PATH_TO_ANCHOR)/TpLockInAmp.exe
 ## Product type : executable
 ## 
@@ -155,7 +155,7 @@ DEFINES = $(DEFINES_BUILD_ARGS) $(DEFINES_CUSTOM) $(DEFINES_OPTS) $(DEFINES_STAN
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(START_DIR)/TpLockInAmp_ert_rtw/TpLockInAmp.c
+SRCS = $(START_DIR)/TpLockInAmp_ert_rtw/TpLockInAmp.c $(START_DIR)/TpLockInAmp_ert_rtw/TpLockInAmp_data.c
 
 MAIN_SRC = $(START_DIR)/TpLockInAmp_ert_rtw/ert_main.c
 
@@ -165,7 +165,7 @@ ALL_SRCS = $(SRCS) $(MAIN_SRC)
 ## OBJECTS
 ###########################################################################
 
-OBJS = TpLockInAmp.obj
+OBJS = TpLockInAmp.obj TpLockInAmp_data.obj
 
 MAIN_OBJ = ert_main.obj
 
@@ -282,6 +282,10 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS) $(MAIN_OBJ)
 
 
 TpLockInAmp.obj : $(START_DIR)/TpLockInAmp_ert_rtw/TpLockInAmp.c
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+
+
+TpLockInAmp_data.obj : $(START_DIR)/TpLockInAmp_ert_rtw/TpLockInAmp_data.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 

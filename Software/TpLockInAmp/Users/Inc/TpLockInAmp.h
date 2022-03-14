@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'TpLockInAmp'.
  *
- * Model version                  : 1.15
+ * Model version                  : 1.16
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Fri Feb 25 10:10:11 2022
+ * C/C++ source code generated on : Thu Mar  3 17:19:34 2022
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM 7
@@ -34,18 +34,6 @@
 #define rtmSetErrorStatus(rtm, val)    ((rtm)->errorStatus = (val))
 #endif
 
-/* Block signals for system '<S1>/Lowpass Filter' */
-typedef struct {
-  real32_T LowpassFilter;              /* '<S1>/Lowpass Filter' */
-} B_LowpassFilter_TpLockInAmp_T;
-
-/* Block states (default storage) for system '<S1>/Lowpass Filter' */
-typedef struct {
-  dsp_LowpassFilter_TpLockInAmp_T obj; /* '<S1>/Lowpass Filter' */
-  boolean_T objisempty;                /* '<S1>/Lowpass Filter' */
-  boolean_T isInitialized;             /* '<S1>/Lowpass Filter' */
-} DW_LowpassFilter_TpLockInAmp_T;
-
 /* Block signals for system '<S1>/Moving Average1' */
 typedef struct {
   real32_T MovingAverage1;             /* '<S1>/Moving Average1' */
@@ -61,19 +49,29 @@ typedef struct {
 typedef struct {
   B_MovingAverage1_TpLockInAmp_T MovingAverage2;/* '<S1>/Moving Average1' */
   B_MovingAverage1_TpLockInAmp_T MovingAverage1;/* '<S1>/Moving Average1' */
-  B_LowpassFilter_TpLockInAmp_T LowpassFilter1;/* '<S1>/Lowpass Filter' */
-  B_LowpassFilter_TpLockInAmp_T LowpassFilter;/* '<S1>/Lowpass Filter' */
 } B_TpLockInAmp_T;
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
+  dsp_LowpassFilter_TpLockInAmp_T obj; /* '<S1>/Lowpass Filter1' */
+  dsp_LowpassFilter_TpLockInAmp_T obj_n;/* '<S1>/Lowpass Filter' */
+  real32_T GeneratedFilterBlock_states[791];/* '<S2>/Generated Filter Block' */
   real32_T SineWave1_AccFreqNorm;      /* '<S1>/Sine Wave1' */
   real32_T SineWave2_AccFreqNorm;      /* '<S1>/Sine Wave2' */
+  int32_T GeneratedFilterBlock_circBuf;/* '<S2>/Generated Filter Block' */
+  boolean_T isInitialized;             /* '<S1>/Lowpass Filter1' */
+  boolean_T isInitialized_c;           /* '<S1>/Lowpass Filter' */
   DW_MovingAverage1_TpLockInAmp_T MovingAverage2;/* '<S1>/Moving Average1' */
   DW_MovingAverage1_TpLockInAmp_T MovingAverage1;/* '<S1>/Moving Average1' */
-  DW_LowpassFilter_TpLockInAmp_T LowpassFilter1;/* '<S1>/Lowpass Filter' */
-  DW_LowpassFilter_TpLockInAmp_T LowpassFilter;/* '<S1>/Lowpass Filter' */
 } DW_TpLockInAmp_T;
+
+/* Constant parameters (default storage) */
+typedef struct {
+  /* Computed Parameter: GeneratedFilterBlock_Coefficien
+   * Referenced by: '<S2>/Generated Filter Block'
+   */
+  real32_T GeneratedFilterBlock_Coefficien[792];
+} ConstP_TpLockInAmp_T;
 
 /* Real-time Model Data Structure */
 struct tag_RTM_TpLockInAmp_T {
@@ -85,6 +83,9 @@ extern B_TpLockInAmp_T TpLockInAmp_B;
 
 /* Block states (default storage) */
 extern DW_TpLockInAmp_T TpLockInAmp_DW;
+
+/* Constant parameters (default storage) */
+extern const ConstP_TpLockInAmp_T TpLockInAmp_ConstP;
 
 /* Model entry point functions */
 extern void TpLockInAmp_initialize(void);
@@ -98,6 +99,7 @@ extern RT_MODEL_TpLockInAmp_T *const TpLockInAmp_M;
 
 /* Declaration for custom storage class: Global */
 extern real32_T signal_amp;            /* '<S1>/MATLAB Function' */
+extern real32_T signal_bpf;            /* '<S2>/Generated Filter Block' */
 extern real32_T signal_input;          /* '<Root>/In1' */
 
 /*-
@@ -116,7 +118,8 @@ extern real32_T signal_input;          /* '<Root>/In1' */
  *
  * '<Root>' : 'TpLockInAmp'
  * '<S1>'   : 'TpLockInAmp/Subsystem'
- * '<S2>'   : 'TpLockInAmp/Subsystem/MATLAB Function'
+ * '<S2>'   : 'TpLockInAmp/Subsystem/Bandpass Filter'
+ * '<S3>'   : 'TpLockInAmp/Subsystem/MATLAB Function'
  */
 #endif                                 /* RTW_HEADER_TpLockInAmp_h_ */
 

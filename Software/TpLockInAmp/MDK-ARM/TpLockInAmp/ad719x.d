@@ -23,6 +23,9 @@ tplockinamp\ad719x.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio_ex.
 tplockinamp\ad719x.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dma.h
 tplockinamp\ad719x.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dma_ex.h
 tplockinamp\ad719x.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_cortex.h
+tplockinamp\ad719x.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_adc.h
+tplockinamp\ad719x.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_adc.h
+tplockinamp\ad719x.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_adc_ex.h
 tplockinamp\ad719x.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dac.h
 tplockinamp\ad719x.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dac_ex.h
 tplockinamp\ad719x.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h
@@ -42,6 +45,7 @@ tplockinamp\ad719x.o: ../Core/Inc/main.h
 tplockinamp\ad719x.o: ..\Users\Inc\Usermain.h
 tplockinamp\ad719x.o: ../Core/Inc/gpio.h
 tplockinamp\ad719x.o: ../Core/Inc/dac.h
+tplockinamp\ad719x.o: ../Core/Inc/adc.h
 tplockinamp\ad719x.o: ../Core/Inc/usart.h
 tplockinamp\ad719x.o: D:\Software\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 tplockinamp\ad719x.o: ..\Users\Inc\AD719X.h
