@@ -1,0 +1,9 @@
+Removed Pin From Net: NetName=-12V Pin=J1-2
+Removed Pin From Net: NetName=GND Pin=J1-4
+Removed Pin From Net: NetName=GND Pin=J1-5
+Removed Pin From Net: NetName=+12V Pin=J1-7
+Removed Pin From Net: NetName=+12V Pin=J1-8
+Change Component Footprint: Designator=J1 Old Footprint=Pin HDR1X8/2.54mm-S New Footprint=KF350-5P
+Change Component Comment : Designator=J1 Old Comment=Pin HDR1X8 New Comment=KF350-5P
+Added Pin To Net: NetName=GND Pin=J1-3
+Added Pin To Net: NetName=+12V Pin=J1-5

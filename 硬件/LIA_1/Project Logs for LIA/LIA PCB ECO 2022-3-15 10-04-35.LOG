@@ -1,0 +1,88 @@
+Removed Pin From Net: NetName=GND Pin=J4-1
+Removed Pin From Net: NetName=+3V3 Pin=J4-2
+Removed Pin From Net: NetName=PB10 Pin=J4-3
+Removed Pin From Net: NetName=MCUVREF+ Pin=J4-4
+Removed Pin From Net: NetName=PB2 Pin=J4-5
+Removed Pin From Net: NetName=PB1 Pin=J4-6
+Removed Pin From Net: NetName=PB0 Pin=J4-7
+Removed Pin From Net: NetName=PA7 Pin=J4-8
+Removed Pin From Net: NetName=PA6 Pin=J4-9
+Removed Pin From Net: NetName=PA5 Pin=J4-10
+Removed Pin From Net: NetName=PA4 Pin=J4-11
+Removed Pin From Net: NetName=PA3 Pin=J4-12
+Removed Pin From Net: NetName=PA2 Pin=J4-13
+Removed Pin From Net: NetName=PA1 Pin=J4-14
+Removed Pin From Net: NetName=PA0 Pin=J4-15
+Removed Pin From Net: NetName=RESET Pin=J4-16
+Removed Pin From Net: NetName=PC15 Pin=J4-17
+Removed Pin From Net: NetName=PC14 Pin=J4-18
+Removed Pin From Net: NetName=PC13 Pin=J4-19
+Removed Pin From Net: NetName=VBAT Pin=J4-20
+Removed Pin From Net: NetName=+3V3 Pin=J5-1
+Removed Pin From Net: NetName=GND Pin=J5-2
+Removed Pin From Net: NetName=PB9 Pin=J5-3
+Removed Pin From Net: NetName=BOOT0 Pin=J5-4
+Removed Pin From Net: NetName=PB7 Pin=J5-5
+Removed Pin From Net: NetName=PB6 Pin=J5-6
+Removed Pin From Net: NetName=PB5 Pin=J5-7
+Removed Pin From Net: NetName=PB4 Pin=J5-8
+Removed Pin From Net: NetName=PB3 Pin=J5-9
+Removed Pin From Net: NetName=PA15 Pin=J5-10
+Removed Pin From Net: NetName=PA12 Pin=J5-11
+Removed Pin From Net: NetName=PA11 Pin=J5-12
+Removed Pin From Net: NetName=PA10 Pin=J5-13
+Removed Pin From Net: NetName=PA9 Pin=J5-14
+Removed Pin From Net: NetName=PA8 Pin=J5-15
+Removed Pin From Net: NetName=PB15 Pin=J5-16
+Removed Pin From Net: NetName=PB14 Pin=J5-17
+Removed Pin From Net: NetName=PB13 Pin=J5-18
+Removed Pin From Net: NetName=PB12 Pin=J5-19
+Removed Pin From Net: NetName=PB11 Pin=J5-20
+Change Component Footprint: Designator=J4 Old Footprint=Pin HDR1X20/2.54mm-S New Footprint=Pin HDR1X10/2.54mm-S
+Change Component Footprint: Designator=J5 Old Footprint=Pin HDR1X20/2.54mm-S New Footprint=Pin HDR1X10/2.54mm-S
+Change Component Comment : Designator=J4 Old Comment=Pin HDR1X20 New Comment=Pin HDR1X10
+Change Component Comment : Designator=J5 Old Comment=Pin HDR1X20 New Comment=Pin HDR1X10
+Added Component: Designator=J3(Pin HDR1X10/2.54mm-S)
+Added Component: Designator=J8(Pin HDR1X10/2.54mm-S)
+Added Pin To Net: NetName=PA4 Pin=J3-1
+Added Pin To Net: NetName=PA3 Pin=J3-2
+Added Pin To Net: NetName=PA2 Pin=J3-3
+Added Pin To Net: NetName=PA1 Pin=J3-4
+Added Pin To Net: NetName=PA0 Pin=J3-5
+Added Pin To Net: NetName=RESET Pin=J3-6
+Added Pin To Net: NetName=PC15 Pin=J3-7
+Added Pin To Net: NetName=PC14 Pin=J3-8
+Added Pin To Net: NetName=PC13 Pin=J3-9
+Added Pin To Net: NetName=VBAT Pin=J3-10
+Added Pin To Net: NetName=+3V3 Pin=J4-1
+Added Pin To Net: NetName=GND Pin=J4-2
+Added Pin To Net: NetName=PB9 Pin=J4-3
+Added Pin To Net: NetName=BOOT0 Pin=J4-4
+Added Pin To Net: NetName=PB7 Pin=J4-5
+Added Pin To Net: NetName=PB6 Pin=J4-6
+Added Pin To Net: NetName=PB5 Pin=J4-7
+Added Pin To Net: NetName=PB4 Pin=J4-8
+Added Pin To Net: NetName=PB3 Pin=J4-9
+Added Pin To Net: NetName=PA15 Pin=J4-10
+Added Pin To Net: NetName=PA12 Pin=J5-1
+Added Pin To Net: NetName=PA11 Pin=J5-2
+Added Pin To Net: NetName=PA10 Pin=J5-3
+Added Pin To Net: NetName=PA9 Pin=J5-4
+Added Pin To Net: NetName=PA8 Pin=J5-5
+Added Pin To Net: NetName=PB15 Pin=J5-6
+Added Pin To Net: NetName=PB14 Pin=J5-7
+Added Pin To Net: NetName=PB13 Pin=J5-8
+Added Pin To Net: NetName=PB12 Pin=J5-9
+Added Pin To Net: NetName=PB11 Pin=J5-10
+Added Pin To Net: NetName=GND Pin=J8-1
+Added Pin To Net: NetName=+3V3 Pin=J8-2
+Added Pin To Net: NetName=PB10 Pin=J8-3
+Added Pin To Net: NetName=MCUVREF+ Pin=J8-4
+Added Pin To Net: NetName=PB2 Pin=J8-5
+Added Pin To Net: NetName=PB1 Pin=J8-6
+Added Pin To Net: NetName=PB0 Pin=J8-7
+Added Pin To Net: NetName=PA7 Pin=J8-8
+Added Pin To Net: NetName=PA6 Pin=J8-9
+Added Pin To Net: NetName=PA5 Pin=J8-10
+Added Member To Class: ClassName=LIA Member=Component J3 Pin HDR1X10
+Added Member To Class: ClassName=LIA Member=Component J8 Pin HDR1X10
