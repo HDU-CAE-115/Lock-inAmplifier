@@ -41,7 +41,7 @@
 "tplockinamp\usermain.o"
 "tplockinamp\oled.o"
 "tplockinamp\tplockinamp_data.o"
---library_type=microlib --strict --scatter "TpLockInAmp\TpLockInAmp.sct"
+--strict --scatter "TpLockInAmp\TpLockInAmp.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "TpLockInAmp.map" -o TpLockInAmp\TpLockInAmp.axf
