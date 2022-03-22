@@ -1,91 +1,56 @@
 #include "Usermain.h"
-#define Immediate //Immediate|Temporary
 
-int cnt = 0;
+#define NUM_OF_ADC_BUF 60
+#define NUM_OF_ADC_CHANNEL 4
+#define ADC1_CHANNEL_1 0
+#define ADC1_CHANNEL_2 1
+#define ADC1_CHANNEL_3 2
+#define ADC1_CHANNEL_4 3
+
+volatile uint16_t adc1_val_buf[NUM_OF_ADC_BUF][NUM_OF_ADC_CHANNEL] = {0}; //传递给DMA存放多通道采样值的数组
+volatile	uint8_t AdcConvEnd = 0;
+	
 int op_cnt = 1;
+int i = 0;
 float signal_output = 0;
 float adc_result[MAXDATASIZE] = {0};
-float Stage1_V = 0;
 char SIGOP[45] = {0};
 
 void Usermain(){
+	//OLED初始化
 	OLED_Init();
-	//初始化、开启DAC和ADC
-	HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 2048);
-	HAL_DAC_Start(&hdac1, DAC_CHANNEL_1);
-	//AD7190初始化
-	AD7190_RST();
-	//写配置寄存器
-	AD7190_WR_ConfigReg(0x00,0x10,0x08);//通道1、1倍增益
-	//写模式寄存器7
-	AD7190_WR_ModeReg(0x0C,0x00,0x14);// 240HZ、960HZ(0x05)
-
-//	buf[0] = 0x28;
-//	HAL_SPI_Transmit(&hspi1,buf,1,1000);//control the progress to write mode register 
-//	buf[0] = 0x40;
-//	HAL_SPI_Transmit(&hspi1,buf,1,1000);//control the progress to write mode register
-
-#ifdef Temporary
-
-	AD7190_ReadDataContinous(MAXDATASIZE);
-	AD7190_ValueConversion(adc_result,MAXDATASIZE);
-	//for(cnt = 0;cnt<MAXDATASIZE;cnt++) printf("%lf\n",adc_result[cnt]);
-	TpLockInAmp_initialize();//锁相放大器初始化
-	//printf("***********************\n");
-	cnt=0;
-	while(cnt<MAXDATASIZE){
-		signal_input = adc_result[cnt];
-		TpLockInAmp_step();
-		signal_output = signal_amp;
-		HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, (signal_output/3.3)*4096);
-		printf("%lf\n",signal_output);
-//		if( (cnt==(MAXDATASIZE-500)) || (cnt==(MAXDATASIZE-450)) || (cnt==(MAXDATASIZE-400)) || (cnt==(MAXDATASIZE-350))
-//			|| (cnt==MAXDATASIZE-300) || (cnt==(MAXDATASIZE-250)) || (cnt==(MAXDATASIZE-200)) || (cnt==(MAXDATASIZE-150))
-//			|| (cnt==(MAXDATASIZE-100)) || (cnt==(MAXDATASIZE-50)) || (cnt==MAXDATASIZE) ){
-//			amp_avr += signal_output;
-//		}
-		cnt++;
-	}
-//	TpLockInAmp_terminate();//锁相放大器停止
-	//printf("***********************\n");
-	while(1){
-		cnt = 0;
-		AD7190_ReadDataContinous(MAXDATASIZE);
-		AD7190_ValueConversion(adc_result,MAXDATASIZE);
-		while(cnt<MAXDATASIZE){
-			signal_input = adc_result[cnt];
-			TpLockInAmp_step();
-			signal_output = signal_amp;
-			if(cnt>1000){
-				HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, (signal_output/3.3)*4096);
-				printf("%lf\n",signal_output);
-			}
-			cnt++;
-		}
-	}
-
-#elif defined Immediate
+	OLED_ShowString(5, 0, "---------------", 16);
 	
+	//初始化、开启DAC和ADC
+	HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 0);
+	HAL_DAC_Start(&hdac1, DAC_CHANNEL_1);
+	
+	HAL_TIM_Base_Start_IT(&htim6);
+	HAL_ADCEx_Calibration_Start(&hadc1,ADC_SINGLE_ENDED);
+	HAL_ADC_Start_DMA(&hadc1,(uint32_t*) &adc1_val_buf, NUM_OF_ADC_BUF*NUM_OF_ADC_CHANNEL*2);
+	
+	//锁相放大器初始化
 	TpLockInAmp_initialize();
+	
 	while(1){
-		HAL_ADC_Start(&hadc1);
-		HAL_ADC_PollForConversion(&hadc1, 100);//100ms
-		Stage1_V = (float) HAL_ADC_GetValue(&hadc1) / 4096 * 3.3;
-		printf("$%f ;",Stage1_V);
-		signal_input = AD7190_ReadDataOnce();
+		if(i>=NUM_OF_ADC_BUF) i=0;
+		printf("%f\r\n",(float)adc1_val_buf[i][ADC1_CHANNEL_2]*3.3/4095);
+		HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, (uint32_t) adc1_val_buf[i][ADC1_CHANNEL_1]);
+		//sprintf(SIGOP, "%f", (float)adc1_val_buf[i]*3.3/4095);
+		//OLED_ShowString(5, 3, SIGOP, 16);
+		signal_input = (float)(adc1_val_buf[i][ADC1_CHANNEL_1]*3.3/4095-1.66);
 		TpLockInAmp_step();
 		signal_output = signal_amp;
+		//HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, signal_output/3.3*4095);
+		//printf("%f\r\n",signal_output);
+		i++;
 		if( ( op_cnt++ ) % 100 == 0 ){
 			//OLED_Clear();
 			sprintf(SIGOP, "%f", signal_amp);
 			OLED_ShowString(5, 3, SIGOP, 16);
 		}
-		HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, ((signal_bpf+1.5)/3.3)*4095);
-		//printf("%f\n",signal_output);
+//		//printf("%f\n",signal_output);
 	}
-
-#endif
-
 }
 
 #ifdef __GNUC__

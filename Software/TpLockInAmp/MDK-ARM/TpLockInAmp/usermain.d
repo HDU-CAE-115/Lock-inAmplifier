@@ -37,6 +37,8 @@ tplockinamp\usermain.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pwr.h
 tplockinamp\usermain.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pwr_ex.h
 tplockinamp\usermain.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_spi.h
 tplockinamp\usermain.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_spi_ex.h
+tplockinamp\usermain.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h
+tplockinamp\usermain.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h
 tplockinamp\usermain.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h
 tplockinamp\usermain.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h
 tplockinamp\usermain.o: D:\Software\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
@@ -45,6 +47,7 @@ tplockinamp\usermain.o: ../Core/Inc/main.h
 tplockinamp\usermain.o: ../Core/Inc/spi.h
 tplockinamp\usermain.o: ../Core/Inc/dac.h
 tplockinamp\usermain.o: ../Core/Inc/adc.h
+tplockinamp\usermain.o: ../Core/Inc/tim.h
 tplockinamp\usermain.o: ../Core/Inc/usart.h
 tplockinamp\usermain.o: D:\Software\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 tplockinamp\usermain.o: ..\Users\Inc\AD719X.h

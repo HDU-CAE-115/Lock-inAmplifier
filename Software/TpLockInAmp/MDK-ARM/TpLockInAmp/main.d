@@ -37,12 +37,16 @@ tplockinamp\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pwr.h
 tplockinamp\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pwr_ex.h
 tplockinamp\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_spi.h
 tplockinamp\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_spi_ex.h
+tplockinamp\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h
+tplockinamp\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h
 tplockinamp\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h
 tplockinamp\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h
 tplockinamp\main.o: ../Core/Inc/adc.h
 tplockinamp\main.o: ../Core/Inc/dac.h
+tplockinamp\main.o: ../Core/Inc/dma.h
 tplockinamp\main.o: ../Core/Inc/i2c.h
 tplockinamp\main.o: ../Core/Inc/spi.h
+tplockinamp\main.o: ../Core/Inc/tim.h
 tplockinamp\main.o: ../Core/Inc/usart.h
 tplockinamp\main.o: ../Core/Inc/gpio.h
 tplockinamp\main.o: ..\Users\Inc\Usermain.h

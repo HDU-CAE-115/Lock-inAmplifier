@@ -6,6 +6,7 @@
 #include "spi.h"
 #include "dac.h"
 #include "adc.h"
+#include "tim.h"
 #include "usart.h"
 #include "math.h"
 #include "AD719X.h"

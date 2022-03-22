@@ -4,8 +4,10 @@
 "tplockinamp\gpio.o"
 "tplockinamp\adc.o"
 "tplockinamp\dac.o"
+"tplockinamp\dma.o"
 "tplockinamp\i2c.o"
 "tplockinamp\spi.o"
+"tplockinamp\tim.o"
 "tplockinamp\usart.o"
 "tplockinamp\stm32g4xx_it.o"
 "tplockinamp\stm32g4xx_hal_msp.o"
@@ -41,7 +43,7 @@
 "tplockinamp\usermain.o"
 "tplockinamp\oled.o"
 "tplockinamp\tplockinamp_data.o"
---strict --scatter "TpLockInAmp\TpLockInAmp.sct"
+--library_type=microlib --strict --scatter "TpLockInAmp\TpLockInAmp.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "TpLockInAmp.map" -o TpLockInAmp\TpLockInAmp.axf
