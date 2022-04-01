@@ -1,0 +1,12 @@
+Removed Pin From Net: NetName=BPF3_OUT Pin=R11-1
+Removed Pin From Net: NetName=BPF_OUT Pin=R11-2
+Change Component Comment : Designator=R11 Old Comment=0R New Comment=9K
+Added Component: Designator=R31(0603R)
+Added Component: Designator=R32(0603R)
+Added Pin To Net: NetName=BPF3_OUT Pin=R11-2
+Added Pin To Net: NetName=BPF_OUT Pin=R31-1
+Added Pin To Net: NetName=GND Pin=R32-1
+Added Pin To Net: NetName=NetR11_1 Pin=R11-1
+Added Pin To Net: NetName=NetR11_1 Pin=R31-2
+Added Pin To Net: NetName=NetR11_1 Pin=R32-2
+Added Net: Name=NetR11_1

@@ -1,0 +1,6 @@
+Added Component: Designator=C29(0603C)
+Added Component: Designator=C30(0603C)
+Added Pin To Net: NetName=GND Pin=C29-1
+Added Pin To Net: NetName=+12V Pin=C29-2
+Added Pin To Net: NetName=-12V Pin=C30-1
+Added Pin To Net: NetName=GND Pin=C30-2

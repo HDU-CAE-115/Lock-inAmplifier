@@ -1,0 +1,5 @@
+Added Component: Designator=J8(Fe-HDR1X4/2.54-S)
+Added Pin To Net: NetName=BPF_OUT Pin=J8-1
+Added Pin To Net: NetName=-12V Pin=J8-2
+Added Pin To Net: NetName=GND Pin=J8-3
+Added Pin To Net: NetName=+12V Pin=J8-4
