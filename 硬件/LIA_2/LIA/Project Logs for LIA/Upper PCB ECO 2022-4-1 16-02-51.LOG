@@ -1,3 +1,0 @@
-Removed Pin From Net: NetName=BPF1_IN Pin=R11-2
-Added Pin To Net: NetName=BPF_OUT Pin=R11-2
-Added Net: Name=BPF_OUT
