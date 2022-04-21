@@ -1,6 +1,7 @@
 #include "AD719X.h"
 
 double value = 0;
+
 uint32_t AD7190_data[MAXDATASIZE] = {0};
 
 void AD7190_RST(void){

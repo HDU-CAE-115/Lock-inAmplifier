@@ -33,6 +33,8 @@ tplockinamp\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ex.h
 tplockinamp\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash_ramfunc.h
 tplockinamp\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_i2c.h
 tplockinamp\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_i2c_ex.h
+tplockinamp\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp.h
+tplockinamp\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_opamp_ex.h
 tplockinamp\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pwr.h
 tplockinamp\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pwr_ex.h
 tplockinamp\main.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_spi.h
@@ -45,6 +47,7 @@ tplockinamp\main.o: ../Core/Inc/adc.h
 tplockinamp\main.o: ../Core/Inc/dac.h
 tplockinamp\main.o: ../Core/Inc/dma.h
 tplockinamp\main.o: ../Core/Inc/i2c.h
+tplockinamp\main.o: ../Core/Inc/opamp.h
 tplockinamp\main.o: ../Core/Inc/spi.h
 tplockinamp\main.o: ../Core/Inc/tim.h
 tplockinamp\main.o: ../Core/Inc/usart.h
@@ -54,8 +57,11 @@ tplockinamp\main.o: D:\Software\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 tplockinamp\main.o: D:\Software\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 tplockinamp\main.o: ..\Users\Inc\AD719X.h
 tplockinamp\main.o: ..\Users\Inc\Usermain.h
-tplockinamp\main.o: ..\Users\Inc\TpLockInAmp.h
+tplockinamp\main.o: ..\Users\Inc\TpLockInAmpV1.h
 tplockinamp\main.o: ..\Users\Inc\rtwtypes.h
-tplockinamp\main.o: ..\Users\Inc\TpLockInAmp_types.h
-tplockinamp\main.o: ..\Users\Inc\oled.h
+tplockinamp\main.o: ..\Users\Inc\TpLockInAmpV1_types.h
+tplockinamp\main.o: ..\Users\Inc\ssd1306.h
+tplockinamp\main.o: ..\Users\Inc\fonts.h
 tplockinamp\main.o: D:\Software\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+tplockinamp\main.o: D:\Software\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+tplockinamp\main.o: ..\Users\Inc\gui.h

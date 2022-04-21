@@ -24,6 +24,7 @@
 #include "dma.h"
 #include "i2c.h"
 #include "opamp.h"
+#include "spi.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -103,6 +104,8 @@ int main(void)
   MX_ADC1_Init();
   MX_OPAMP2_Init();
   MX_OPAMP3_Init();
+  MX_SPI1_Init();
+  MX_TIM7_Init();
   /* USER CODE BEGIN 2 */
 	HAL_UART_Receive_IT(&huart1,RxBuff,1);
   /* USER CODE END 2 */

@@ -6,7 +6,7 @@
 #include "spi.h"
 #include "Usermain.h"
 
-#define V_REF 2.5
+#define V_REF 1
 #define MAXDATASIZE 2048
 /*     通讯寄存器8位，只写,RS2,RS1,RS0=0,0,0;                                       */
 /*     通讯寄存器位功能操作宏定义                                                   */
