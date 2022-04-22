@@ -44,9 +44,9 @@ void Usermain(){
 	HAL_DAC_Start(&hdac1, DAC_CHANNEL_1);
 //	
 //	//LED点亮
-//	HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_RESET);
-//	HAL_GPIO_WritePin(LED2_GPIO_Port,LED2_Pin,GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(LED3_GPIO_Port,LED3_Pin,GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LED2_GPIO_Port,LED2_Pin,GPIO_PIN_RESET);
+//	HAL_GPIO_WritePin(LED3_GPIO_Port,LED3_Pin,GPIO_PIN_RESET);
 #ifdef USE_AD7190
 	//AD7190初始化
 	AD7190_RST();
@@ -61,8 +61,8 @@ void Usermain(){
 	//开启定时器7
 	HAL_TIM_Base_Start_IT(&htim7);
 #elif defined USE_MCUADC
-	//初始化定时器6
-	HAL_TIM_Base_Start_IT(&htim6);
+	//初始化打开定时器2
+	HAL_TIM_Base_Start_IT(&htim2);
 	
 	//初始化4通道ADC+校准
 	HAL_ADCEx_Calibration_Start(&hadc1,ADC_SINGLE_ENDED);
@@ -101,40 +101,41 @@ void Usermain(){
 //		}
 #elif defined USE_MCUADC
 		if(i>=NUM_OF_ADC_BUF) i=0;
-//		if(display_flag)		
-//		{
-//			display_flag = 0;
-//			sprintf(TIME_CNT, "Time: %d s", ++time_cnt);
-////			OLED_BOOL_DrawStr(35,5,TIME_CNT,OLED_BOOL_Replace);
-//			SSD1306_GotoXY(5,5);
-//			SSD1306_Puts(TIME_CNT, &Font_7x10, 1);
-//			sprintf(AVE, "%f", sum_value/240);
-//			sum_value = 0;
-////			OLED_BOOL_DrawStr(5,30,AVE,OLED_BOOL_Replace);
-//			SSD1306_GotoXY(20,35);
-//			SSD1306_Puts(AVE, &Font_11x18, 1);
-//			SSD1306_UpdateScreen(); 																			//显示
-////			OLED_Refresh();
-//		}
-//		if(app_flag)
-//		{
-//			app_flag = 0;
-//			sum_value += (float)adc1_val_buf[i][ADC1_CHANNEL_1]*3.3/4095;
-//		}
-		//锁相放大器用
-		signal_input = (float)adc1_val_buf[i][ADC1_CHANNEL_3]*3.3/4095-2.5;
-		TpLockInAmpV1_step();
-		signal_amp = signal_output;
-		if(display_flag){
+		if(display_flag)		
+		{
 			display_flag = 0;
 			sprintf(TIME_CNT, "Time: %d s", ++time_cnt);
+//			OLED_BOOL_DrawStr(35,5,TIME_CNT,OLED_BOOL_Replace);
 			SSD1306_GotoXY(5,5);
 			SSD1306_Puts(TIME_CNT, &Font_7x10, 1);
-			sprintf(AVE, "%f", signal_amp);
+			sprintf(AVE, "%f", sum_value/240);
+			sum_value = 0;
+//			OLED_BOOL_DrawStr(5,30,AVE,OLED_BOOL_Replace);
 			SSD1306_GotoXY(20,35);
 			SSD1306_Puts(AVE, &Font_11x18, 1);
-			SSD1306_UpdateScreen();
+			SSD1306_UpdateScreen(); 																			//显示
+//			OLED_Refresh();
 		}
+		if(app_flag)
+		{
+			app_flag = 0;
+			sum_value += (float)adc1_val_buf[i][ADC1_CHANNEL_1]*3.3/4095;
+		}
+//		//锁相放大器用
+//		signal_input = (float)adc1_val_buf[i][ADC1_CHANNEL_3]*3.3/4095-2.5;
+//		TpLockInAmpV1_step();
+//		signal_amp = signal_output;
+//		if(display_flag){
+//			display_flag = 0;
+//			sprintf(TIME_CNT, "Time: %d s", ++time_cnt);
+//			SSD1306_GotoXY(5,5);
+//			SSD1306_Puts(TIME_CNT, &Font_7x10, 1);
+//			sprintf(AVE, "%f", signal_amp);
+//			
+//			SSD1306_GotoXY(20,35);
+//			SSD1306_Puts(AVE, &Font_11x18, 1);
+//			SSD1306_UpdateScreen();
+//		}
 		i++;
 #endif
 	}
@@ -148,9 +149,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		display_flag = 1;
 	}
 #elif defined USE_MCUADC
-	if(htim->Instance==TIM6)//1/240s
+	if(htim->Instance==TIM2)//1/240s
 	{
-		step_flag = 1;
+//		step_flag = 1;
 		app_flag = 1;
 		display_cnt ++;
 		if(display_cnt >= 240)

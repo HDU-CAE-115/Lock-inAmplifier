@@ -106,6 +106,7 @@ int main(void)
   MX_OPAMP3_Init();
   MX_SPI1_Init();
   MX_TIM7_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 	HAL_UART_Receive_IT(&huart1,RxBuff,1);
   /* USER CODE END 2 */
