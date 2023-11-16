@@ -1,4 +1,4 @@
---cpu=Cortex-M4.fp.sp
+--cpu Cortex-M4.fp
 "tplockinamp\startup_stm32g431xx.o"
 "tplockinamp\main.o"
 "tplockinamp\gpio.o"
@@ -49,6 +49,6 @@
 "tplockinamp\tplockinampv1.o"
 "tplockinamp\tplockinampv1_data.o"
 --library_type=microlib --strict --scatter "TpLockInAmp\TpLockInAmp.sct"
---summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "TpLockInAmp.map" -o TpLockInAmp\TpLockInAmp.axf

@@ -121,21 +121,21 @@ void Usermain(){
 			app_flag = 0;
 			sum_value += (float)adc1_val_buf[i][ADC1_CHANNEL_1]*3.3/4095;
 		}
-//		//锁相放大器用
-//		signal_input = (float)adc1_val_buf[i][ADC1_CHANNEL_3]*3.3/4095-2.5;
-//		TpLockInAmpV1_step();
-//		signal_amp = signal_output;
-//		if(display_flag){
-//			display_flag = 0;
-//			sprintf(TIME_CNT, "Time: %d s", ++time_cnt);
-//			SSD1306_GotoXY(5,5);
-//			SSD1306_Puts(TIME_CNT, &Font_7x10, 1);
-//			sprintf(AVE, "%f", signal_amp);
-//			
-//			SSD1306_GotoXY(20,35);
-//			SSD1306_Puts(AVE, &Font_11x18, 1);
-//			SSD1306_UpdateScreen();
-//		}
+		//锁相放大器用
+		signal_input = (float)adc1_val_buf[i][ADC1_CHANNEL_3]*3.3/4095-2.5;
+		TpLockInAmpV1_step();
+		signal_amp = signal_output;
+		if(display_flag){
+			display_flag = 0;
+			sprintf(TIME_CNT, "Time: %d s", ++time_cnt);
+			SSD1306_GotoXY(5,5);
+			SSD1306_Puts(TIME_CNT, &Font_7x10, 1);
+			sprintf(AVE, "%f", signal_amp);
+			
+			SSD1306_GotoXY(20,35);
+			SSD1306_Puts(AVE, &Font_11x18, 1);
+			SSD1306_UpdateScreen();
+		}
 		i++;
 #endif
 	}

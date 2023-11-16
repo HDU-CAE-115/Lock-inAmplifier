@@ -668,14 +668,13 @@ ARM Macro Assembler    Page 11
   423 0000001C                 END
               00000000 
               00000000 
-Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
-interwork --depend=tplockinamp\startup_stm32g431xx.d -otplockinamp\startup_stm3
-2g431xx.o -I.\RTE\_TpLockInAmp -ID:\Software\Keil_v5\Arm\Packs\ARM\CMSIS\5.8.0\
-CMSIS\Core\Include -ID:\Software\Keil_v5\Arm\Packs\Keil\STM32G4xx_DFP\1.4.0\Dri
-vers\CMSIS\Device\ST\STM32G4xx\Include --predefine="__MICROLIB SETA 1" --predef
-ine="__UVISION_VERSION SETA 535" --predefine="_RTE_ SETA 1" --predefine="STM32G
-431xx SETA 1" --predefine="_RTE_ SETA 1" --list=startup_stm32g431xx.lst startup
-_stm32g431xx.s
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=tplockinamp\startup_stm32g431xx.d -otplockinamp\startup_stm32g4
+31xx.o -IC:\Users\63526\Desktop\Lock-inAmplifier\Software\TpLockInAmp\MDK-ARM\R
+TE -ID:\Software\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include -ID:\Software\K
+eil_v5\ARM\PACK\Keil\STM32G4xx_DFP\1.5.0 --predefine="__MICROLIB SETA 1" --pred
+efine="__UVISION_VERSION SETA 514" --predefine="_RTE_ SETA 1" --predefine="STM3
+2G431xx SETA 1" --list=startup_stm32g431xx.lst startup_stm32g431xx.s
 
 
 
